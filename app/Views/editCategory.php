@@ -8,6 +8,7 @@ use App\Controllers\CategoryController;
 
 
 $category = new CategoryController();
+
 $categoryInfo = $category->getCategoryById($_GET['id']);
 
 $category->updateCategory();

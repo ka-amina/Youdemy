@@ -29,5 +29,9 @@ class Category {
         return $this->orm->update($data, $conditions);
     }
 
+    public function deleteCategory($id){
+        return $this->orm->delete($id);
+    }
+
 
 }

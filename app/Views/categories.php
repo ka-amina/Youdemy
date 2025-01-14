@@ -8,6 +8,7 @@ use App\Controllers\CategoryController;
 $categoryList = new CategoryController();
 $categories = $categoryList->listCategories();
 $categoryList->createCategory($_POST);
+$categoryList->deleteCategory($_GET);
 
 ?>
 <!DOCTYPE html>
