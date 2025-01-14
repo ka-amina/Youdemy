@@ -20,4 +20,16 @@ class Tag
     {
         return $this->orm->read();
     }
+
+    public function createTag($data){
+        return $this->orm->create($data);
+    }
+
+    public function getTagById($id){
+        return $this->orm->getById($id);
+    }
+
+    public function updateTag($data,$conditions){
+        return $this->orm->update($data, $conditions);
+    }
 }
