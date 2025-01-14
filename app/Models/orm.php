@@ -73,4 +73,15 @@ class ORM
         $result->execute(array_merge($data, $conditions));
         return;
     }
+
+    public function create($data)
+    {
+        $columns = implode(",", array_keys($data));
+        $values = ":" . implode(", :", array_keys($data));
+        print_r($data);
+        $query = "INSERT  INTO {$this->table} ($columns) VALUES ($values) ";
+        $result = $this->connection->prepare($query);
+        $result->execute($data);
+        return;
+    }
 }
