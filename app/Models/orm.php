@@ -84,4 +84,20 @@ class ORM
         $result->execute($data);
         return;
     }
+
+    public function getById($id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE id=$id";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function sum()
+    {
+        $query = "SELECT COUNT(*) as total from {$this->table}";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetch(PDO::FETCH_ASSOC)['total'];
+    }
 }
