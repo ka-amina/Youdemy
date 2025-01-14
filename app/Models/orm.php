@@ -57,4 +57,20 @@ class ORM
         $result->execute($conditions);
         return $result->rowCount();
     }
+
+    public function update($data, $conditions)
+    {
+        $conditionFields = [];
+        foreach ($conditions as $column => $value) {
+            $conditionFields[] = "$column = :$column";
+        }
+        $updateDataFields = [];
+        foreach ($data as $column => $value) {
+            $updateDataFields[] = "$column = :$column";
+        }
+        $query = "UPDATE {$this->table} SET " . implode(", ", $updateDataFields) . " WHERE " . implode(" AND ", $conditionFields);
+        $result = $this->connection->prepare($query);
+        $result->execute(array_merge($data, $conditions));
+        return;
+    }
 }
