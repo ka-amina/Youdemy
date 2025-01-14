@@ -6,7 +6,7 @@ use App\Models\ORM;
 
 class Tag
 {
-    private $table = 'tags';
+    private string $table = 'tags';
     private $orm;
 
     public function __construct()
@@ -16,20 +16,26 @@ class Tag
     }
 
 
-    public function  getTags()
+    public function  getTags(): array
     {
         return $this->orm->read();
     }
 
-    public function createTag($data){
+    public function createTag(array $data){
         return $this->orm->create($data);
     }
 
-    public function getTagById($id){
+    public function getTagById($id): ?array
+    {
         return $this->orm->getById($id);
     }
 
-    public function updateTag($data,$conditions){
+    public function updateTag($data,$conditions)
+    {
         return $this->orm->update($data, $conditions);
+    }
+
+    public function deleteTag($id){
+        return $this->orm->delete($id);
     }
 }

@@ -9,7 +9,10 @@ use App\Controllers\TagController;
 
 $tagsList = new TagController();
 $tags = $tagsList->listTags();
+
 $tagsList->createTag($_POST);
+
+$tagsList->deleteTag($_GET);
 ?>
 <!DOCTYPE html>
 <html lang="en">

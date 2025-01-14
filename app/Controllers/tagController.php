@@ -13,7 +13,7 @@ class TagController
         $this->tag =  new Tag();
     }
 
-    public function listTags()
+    public function listTags(): array
     {
         return $this->tag->getTags();
     }
@@ -47,7 +47,18 @@ class TagController
             header("Location: tags.php");
             exit();
         }
-        
-       
+    }
+
+
+    public function deleteTag($id)
+    {
+        if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+            if (isset($_GET['id'])) {
+                $id = ['id' => $_GET['id']];
+                $this->tag->deleteTag($id);
+                header("Location: tags.php");
+                exit();
+            }
+        }
     }
 }
