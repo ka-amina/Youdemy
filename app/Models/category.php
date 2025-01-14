@@ -21,5 +21,13 @@ class Category {
         return $this->orm->create($data);
     }
 
+    public function getCategryById($id){
+        return $this->orm->getById($id);
+    }
+
+    public function updateCategory($data, $conditions){
+        return $this->orm->update($data, $conditions);
+    }
+
 
 }
