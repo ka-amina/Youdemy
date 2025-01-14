@@ -17,5 +17,9 @@ class Category {
         return $this->orm->read();
     }
 
+    public function createCategory(array $data){
+        return $this->orm->create($data);
+    }
+
 
 }
