@@ -1,19 +1,4 @@
-<?php
-require_once '../../config/connection.php';
-require '../../vendor/autoload.php';
 
-use App\Controllers\TagController;
-
-$tag = new TagController();
-$tagInfo = $tag->getTagById($_GET['id']);
-$tag_id = $_GET['id'];
-echo $tag_id;
-
-$tag->updateTag();
-?>
- 
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -410,8 +395,8 @@ $tag->updateTag();
                                 <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
                                     <div class="mx-1">
-                                        <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200"><?= $_SESSION["username"] ?></h1>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400"><?= $_SESSION["email"] ?></p>
+                                        <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">username</h1>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">email</p>
                                     </div>
                                 </a>
 
@@ -484,7 +469,7 @@ $tag->updateTag();
                     </div>
                     <div id="tagForm" class=" flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
 
-                        <form action="editTag.php?id=<?=$_GET['id']; ?>" method="POST" class="max-w-sm w-72 mx-auto ">
+                        <form action="/updateTag?id=<?=$_GET['id']; ?>" method="POST" class="max-w-sm w-72 mx-auto ">
                             <input type="hidden" name="id" value="<?=$_GET['id']; ?>">
                             <div class="mb-5">
                                 <label for="tagName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag Name</label>

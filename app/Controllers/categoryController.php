@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Controller;
 use App\Models\Category;
 
-class CategoryController
+class CategoryController extends Controller
 {
     protected $category;
 
@@ -15,26 +16,31 @@ class CategoryController
 
     public function listCategories()
     {
-        return $this->category->getCategories();
+        $categories = $this->category->getCategories();
+        // var_dump($categories);
+        $this->render('category/index', ['categories' => $categories]);
     }
 
-    public function createCategory($data)
+    public function createCategory()
     {
-        if (isset($_GET['action']) && $_GET['action'] == 'create') {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $data = [
-                    'name' => $_POST['categoryName']
-                ];
-                $this->category->createCategory($data);
-                header("Location: categories.php");
-                exit();
-            }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'name' => $_POST['categoryName']
+            ];
+            $this->category->createCategory($data);
+            header('Location: /category');
+            exit();
         }
     }
 
-    public function getCategoryById($id)
+    public function getCategoryById()
     {
-        return $this->category->getCategryById($id);
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $categoryInfo =  $this->category->getCategryById($id);
+            $this->render('category/editCategory', ['categoryInfo' => $categoryInfo]);
+        }
     }
 
     public function updateCategory()
@@ -42,20 +48,20 @@ class CategoryController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->category->updateCategory(['name' => $_POST['categoryName']], ['id' => $_GET['id']]);
-            header("Location: categories.php");
+            header('Location: /category');
             exit();
         }
     }
 
-    public function deleteCategory($id)
+    public function deleteCategory()
     {
-        if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-            if (isset($_GET['id'])) {
-                $id = ['id' => $_GET['id']];
-                $this->category->deleteCategory($id);
-                header("Location: categories.php");
-                exit();
-            }
+
+        if (isset($_GET['id'])) {
+            echo $_GET['id'];
+            $id = ['id' => $_GET['id']];
+            $this->category->deleteCategory($id);
+            header('Location: /category');
+            exit();
         }
     }
 }

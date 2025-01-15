@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Controller;
 use App\Models\Tag;
 
-class TagController
+class TagController extends Controller
 {
     protected $tag;
 
@@ -13,28 +14,31 @@ class TagController
         $this->tag =  new Tag();
     }
 
-    public function listTags(): array
+    public function listTags()
     {
-        return $this->tag->getTags();
+        $tags = $this->tag->getTags();
+        $this->render('tag/index', ['tags' => $tags]);
     }
 
-    public function createTag($data)
+    public function createTag()
     {
-        if (isset($_GET['action']) && $_GET['action'] == 'create') {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $data = [
-                    'name' => $_POST['tagName']
-                ];
-                $this->tag->createTag($data);
-                header("Location: tags.php");
-                exit();
-            }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'name' => $_POST['tagName']
+            ];
+            $this->tag->createTag($data);
+            header("Location: /tags");
+            exit();
         }
     }
 
-    public function getTagById($id)
+    public function getTagById()
     {
-        return $this->tag->getTagById($id);
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $tag =  $this->tag->getTagById($id);
+            $this->render('tag/editTag', ['tagInfo' => $tag]);
+        }
     }
 
     public function updateTag()
@@ -44,21 +48,20 @@ class TagController
                 ['name' => $_POST['tagName']],
                 ['id' => $_GET['id']]
             );
-            header("Location: tags.php");
+            header("Location: /tags");
             exit();
         }
     }
 
 
-    public function deleteTag($id)
+    public function deleteTag()
     {
-        if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-            if (isset($_GET['id'])) {
-                $id = ['id' => $_GET['id']];
-                $this->tag->deleteTag($id);
-                header("Location: tags.php");
-                exit();
-            }
+
+        if (isset($_GET['id'])) {
+            $id = ['id' => $_GET['id']];
+            $this->tag->deleteTag($id);
+            header("Location: /tags");
+            exit();
         }
     }
 }

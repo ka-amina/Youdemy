@@ -1,19 +1,4 @@
-<?php
-require_once '../../config/connection.php';
-require '../../vendor/autoload.php';
 
-
-
-
-use App\Controllers\TagController;
-
-$tagsList = new TagController();
-$tags = $tagsList->listTags();
-
-$tagsList->createTag($_POST);
-
-$tagsList->deleteTag($_GET);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -178,7 +163,7 @@ $tagsList->deleteTag($_GET);
                                 x-bind:class="{
                                'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'tags'
                                  }">
-                                <a href="tags.php">
+                                <a href="/tags">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                                     </svg>
@@ -198,7 +183,7 @@ $tagsList->deleteTag($_GET);
                                 x-bind:class="{
                                'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'categories'
                               }">
-                                <a href="categories.php">
+                                <a href="/category">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z" />
                                     </svg>
@@ -524,7 +509,7 @@ $tagsList->deleteTag($_GET);
                                             </td>
                                             <td class="relative p-2 text-center">
                                                 <div class="flex items-center justify-center">
-                                                    <a href="editTag.php?id=<?= $tag['id']; ?>" id="update"
+                                                    <a href="/editTag?id=<?= $tag['id']; ?>" id="update"
                                                         name="update">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
                                                             height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -532,7 +517,7 @@ $tagsList->deleteTag($_GET);
                                                         </svg>
                                                     </a>
 
-                                                    <a href="tags.php?action=delete&id=<?= $tag['id']; ?>" id="delete"
+                                                    <a href="/deleteTag?action=delete&id=<?= $tag['id']; ?>" id="delete"
                                                         name="delete">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"
                                                             height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -553,7 +538,7 @@ $tagsList->deleteTag($_GET);
                     </div>
                     <div id="tagForm" class=" hidden flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
 
-                            <form action="tags.php?action=create" method="POST" class="max-w-sm w-72 mx-auto ">
+                            <form action="/createTag" method="POST" class="max-w-sm w-72 mx-auto ">
                                 <div class="mb-5">
                                     <label for="tagName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag Name</label>
                                     <input type="text" name="tagName" id="tagName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example: javascript" />
@@ -579,7 +564,20 @@ $tagsList->deleteTag($_GET);
         <!-- END Page Container -->
     </div>
     
-    <script src="../../assets/js/script.js"></script>
+    <!-- <script src="../../../assets/js/script.js"></script> -->
+     <script>
+        const Tagtable= document.getElementById("tagTable");
+const tagForm = document.getElementById("tagForm");
+const showTagForm= document.getElementById("showTagForm");
+
+
+showTagForm.addEventListener("click",(e)=>{
+    e.preventDefault();
+    // console.log("clicked")
+    Tagtable.classList.add("hidden");
+    tagForm.classList.remove("hidden")
+})
+     </script>
 </body>
 
 </html>
