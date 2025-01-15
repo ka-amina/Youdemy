@@ -497,17 +497,17 @@ $tagsList->deleteTag($_GET);
                             </div>
                             <table class="w-full text-sm">
                                 <thead>
-                                    <tr>
+                                <tr class="border border-neutral-600">
                                         <th
-                                            class="py-2 pe-2 text-start font-medium text-slate-500 dark:text-slate-400">
+                                            class="px-4 py-4 text-center font-semibold  text-start  text-slate-500 dark:text-slate-400">
                                             id
                                         </th>
                                         <th
-                                            class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
                                             Tag name
                                         </th>
                                         <th
-                                            class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
                                             Actions
                                         </th>
                                     </tr>
@@ -515,15 +515,15 @@ $tagsList->deleteTag($_GET);
                                 <tbody>
 
                                     <?php foreach ($tags as $tag) : ?>
-                                        <tr>
-                                            <td class="relative p-2">
+                                        <tr class="border border-neutral-300 hover:bg-amber-50 dark:hover:bg-amber-900">
+                                            <td class="relative p-2 text-center">
                                                 <?= $tag['id']; ?>
                                             </td>
-                                            <td class="relative p-2">
+                                            <td class="relative p-2 text-center">
                                                 <?= $tag['name'] ?>
                                             </td>
-                                            <td class="relative p-2">
-                                                <div class="flex">
+                                            <td class="relative p-2 text-center">
+                                                <div class="flex items-center justify-center">
                                                     <a href="editTag.php?id=<?= $tag['id']; ?>" id="update"
                                                         name="update">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"

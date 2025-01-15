@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Config\Database;
+use config\Database;
 use PDO;
 use PDOException;
 
@@ -125,6 +125,4 @@ class ORM
             return;
         }
     }
-
-    
 }
