@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-abstract class user {
+abstract class user implements Authenticable{
     protected $table = 'users';
     protected $orm;
 
@@ -16,7 +16,14 @@ abstract class user {
         $this->orm->setTable($this->table);
     }
 
-    
+    public function register($name, $email, $password) {
+    }
+
+    public function login($email, $password) {
+        
+    }
+
+   
 
     
     

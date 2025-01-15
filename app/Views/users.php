@@ -10,6 +10,8 @@ $users = new adminController();
 
 $user = $users->showUsers();
 
+$users->createUser();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -541,7 +543,7 @@ $user = $users->showUsers();
                                                     <?= $us['username'] ?>
                                                 </td>
                                                 <td class="relative p-2">
-                                                    <img src="../assets/articleimages/<?= $us['profile_picture_url'] ?>" alt="" width="100" height="100">
+                                                    <img src="../../assets/images/<?= $us['profile_picture_url'] ?>" alt="" width="100" height="100">
                                                 </td>
                                                 <td class="relative p-2">
                                                     <?= $us['email'] ?>

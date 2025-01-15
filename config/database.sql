@@ -10,7 +10,7 @@ password_hash varchar(255) not null,
 bio text ,
 profile_picture_url varchar(255),
 created_at  timestamp default current_timestamp,
-role enum('teacher', 'student', 'admin') not null
+role enum('teacher', 'student', 'admin','user') not null default 'user'
 );
 
 create table categories (
@@ -27,7 +27,9 @@ create table courses (
 id bigint not null primary key auto_increment,
 title varchar(100) not null,
 description text,
-content_url varchar(255),
+content enum('document','video') not null,
+content_document varchar(255),
+content_video text,
 level enum('beginner','intermediate','advanced', 'expert') not null,
 is_published boolean default false,
 category_id bigint,
@@ -56,6 +58,7 @@ completedAt datetime,
     foreign key (course_id) references courses(id) on delete cascade
 );
 
+-- -- -- insert data -- -- 
 
 INSERT INTO users (username, email, password_hash, bio, profile_picture_url, role) VALUES
 ('john_doe', 'john.doe@example.com', 'hashedpassword123', 'A passionate teacher of programming.', 'https://example.com/images/john.jpg', 'teacher'),
@@ -79,12 +82,12 @@ INSERT INTO tags (name) VALUES
 ('SEO'),
 ('Digital Marketing');
 
-INSERT INTO courses (title, description, content_url, level, category_id, teacher_id, status) VALUES
-('Intro to JavaScript', 'Learn the basics of JavaScript programming.', 'https://example.com/courses/js101', 'beginner', 1, 1, 'approved'),
-('Advanced Python for Data Science', 'Master Python for advanced data science tasks.', 'https://example.com/courses/python_advanced', 'expert', 5, 1, 'approved'),
-('UI/UX Design Fundamentals', 'Learn the essentials of UI/UX design.', 'https://example.com/courses/uiux_fundamentals', 'beginner', 2, 1, 'pending'),
-('SEO for Beginners', 'A beginner’s guide to SEO for websites.', 'https://example.com/courses/seo101', 'beginner', 3, 2, 'approved'),
-('Machine Learning with Python', 'Deep dive into machine learning algorithms and their implementation in Python.', 'https://example.com/courses/ml_python', 'intermediate', 5, 1, 'approved');
+INSERT INTO courses (title, description, content, content_document ,content_video, level, category_id, teacher_id, status) VALUES
+('Intro to JavaScript', 'Learn the basics of JavaScript programming.','video', null , 'https://example.com/courses/js101', 'beginner', 1, 1, 'approved'),
+('Advanced Python for Data Science', 'Master Python for advanced data science tasks.', 'video','https://example.com/courses/python_advanced',null, 'expert', 5, 1, 'approved'),
+('UI/UX Design Fundamentals', 'Learn the essentials of UI/UX design.', 'video',null,'https://example.com/courses/uiux_fundamentals', 'beginner', 2, 1, 'pending'),
+('SEO for Beginners', 'A beginner’s guide to SEO for websites.', 'video','https://example.com/courses/seo101',null, 'beginner', 3, 2, 'approved'),
+('Machine Learning with Python', 'Deep dive into machine learning algorithms and their implementation in Python.', 'video', null, 'https://example.com/courses/ml_python', 'intermediate', 5, 1, 'approved');
 
 INSERT INTO cours_tags (tag_id, course_id) VALUES
 (1, 1),  -- JavaScript, Intro to JavaScript
