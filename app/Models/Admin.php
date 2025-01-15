@@ -19,4 +19,16 @@ class Admin extends user
     {
         return $this->orm->create($data);
     }
+
+    public function getUser($id){
+        return $this->orm->getById($id);
+    }
+
+    public function updateUser($data,$conditions){
+        return $this->orm->update($data, $conditions);
+    }
+
+    public function deleteUdser($id){
+        return $this->orm->delete($id);
+    }
 }
