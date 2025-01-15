@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Config\Database;
+use config\Database;
 use PDO;
 use PDOException;
 
@@ -52,10 +52,15 @@ class ORM
         foreach ($conditions as $column => $value) {
             $conditionsFields[] = "$column = :$column";
         }
-        $query = "DELETE FROM {$this->table} where " . implode(" AND ", $conditionsFields);
-        $result = $this->connection->prepare($query);
-        $result->execute($conditions);
-        return $result->rowCount();
+        try {
+            $query = "DELETE FROM {$this->table} where " . implode(" AND ", $conditionsFields);
+            $result = $this->connection->prepare($query);
+            $result->execute($conditions);
+            return $result->rowCount();
+        } catch (PDOException $e) {
+            error_log("Error selecting records: " . $e->getMessage());
+            return;
+        }
     }
 
     public function update($data, $conditions)
@@ -68,10 +73,15 @@ class ORM
         foreach ($data as $column => $value) {
             $updateDataFields[] = "$column = :$column";
         }
-        $query = "UPDATE {$this->table} SET " . implode(", ", $updateDataFields) . " WHERE " . implode(" AND ", $conditionFields);
-        $result = $this->connection->prepare($query);
-        $result->execute(array_merge($data, $conditions));
-        return;
+        try {
+            $query = "UPDATE {$this->table} SET " . implode(", ", $updateDataFields) . " WHERE " . implode(" AND ", $conditionFields);
+            $result = $this->connection->prepare($query);
+            $result->execute(array_merge($data, $conditions));
+            return;
+        } catch (PDOException $e) {
+            error_log("Error selecting records: " . $e->getMessage());
+            return;
+        }
     }
 
     public function create($data)
@@ -79,9 +89,40 @@ class ORM
         $columns = implode(",", array_keys($data));
         $values = ":" . implode(", :", array_keys($data));
         print_r($data);
-        $query = "INSERT  INTO {$this->table} ($columns) VALUES ($values) ";
-        $result = $this->connection->prepare($query);
-        $result->execute($data);
-        return;
+        try {
+            $query = "INSERT  INTO {$this->table} ($columns) VALUES ($values) ";
+            $result = $this->connection->prepare($query);
+            $result->execute($data);
+            return;
+        } catch (PDOException $e) {
+            error_log("Error selecting records: " . $e->getMessage());
+            return;
+        }
+    }
+
+    public function getById($id)
+    {
+        try {
+            $query = "SELECT * FROM {$this->table} WHERE id=$id";
+            $result = $this->connection->prepare($query);
+            $result->execute();
+            return $result->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error selecting records: " . $e->getMessage());
+            return;
+        }
+    }
+
+    public function sum()
+    {
+        try {
+            $query = "SELECT COUNT(*) as total from {$this->table}";
+            $result = $this->connection->prepare($query);
+            $result->execute();
+            return $result->fetch(PDO::FETCH_ASSOC)['total'];
+        } catch (PDOException $e) {
+            error_log("Error selecting records: " . $e->getMessage());
+            return;
+        }
     }
 }
