@@ -2,17 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminUser;
-use App\Models\user;
+use App\Models\Admin;
 
 
-class userController
+class adminController
 {
     protected $user;
 
     public function __construct()
     {
-        $this->user = new AdminUser();
+        $this->user = new Admin();
     }
 
     public function showUsers()

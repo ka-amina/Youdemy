@@ -3,10 +3,10 @@ require_once '../../config/connection.php';
 require '../../vendor/autoload.php';
 
 
-use App\Controllers\userController;
+use App\Controllers\adminController;
 
 
-$users = new userController();
+$users = new adminController();
 
 $user = $users->showUsers();
 

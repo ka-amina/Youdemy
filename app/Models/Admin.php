@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class AdminUser extends user
+class Admin extends user
 {
     public function __construct() {
         parent::__construct();
