@@ -1,19 +1,4 @@
-<?php
-require_once '../../config/connection.php';
-require '../../vendor/autoload.php';
 
-
-
-
-use App\Controllers\TagController;
-
-$tagsList = new TagController();
-$tags = $tagsList->listTags();
-
-$tagsList->createTag($_POST);
-
-$tagsList->deleteTag($_GET);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,8 +110,7 @@ $tagsList->deleteTag($_GET);
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185l0-121c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32l0 36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1l32 0 0 69.7c-.1 .9-.1 1.8-.1 2.8l0 112c0 22.1 17.9 40 40 40l16 0c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2l31.9 0 24 0c22.1 0 40-17.9 40-40l0-24 0-64c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 64 0 24c0 22.1 17.9 40 40 40l24 0 32.5 0c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1l16 0c22.1 0 40-17.9 40-40l0-16.2c.3-2.6 .5-5.3 .5-8.1l-.7-160.2 32 0z"/></svg>
                             </a>
                         </button>
-                        
-                       
+
                         <button
                             id="analytics-tab"
                             role="tab"
@@ -178,7 +162,7 @@ $tagsList->deleteTag($_GET);
                                 x-bind:class="{
                                'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'tags'
                                  }">
-                                <a href="tags.php">
+                                <a href="/tags">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                                     </svg>
@@ -218,7 +202,7 @@ $tagsList->deleteTag($_GET);
                                 x-bind:class="{
                                'ring-4 ring-slate-400/50 dark:ring-slate-600/50': activeTab === 'Settings'
                                }">
-                                <a href="users.php">
+                                <a href="/users">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
                                     </svg>
@@ -245,8 +229,6 @@ $tagsList->deleteTag($_GET);
                               </a>
                            </button>
 
-                        
-                        
 
                         <!-- <button
                             x-on:click="activeTab = 'Settings'"
@@ -273,6 +255,7 @@ $tagsList->deleteTag($_GET);
                             </svg>
                         </button> -->
 
+                        
 
 
 
@@ -479,88 +462,61 @@ $tagsList->deleteTag($_GET);
                 id="page-content"
                 class="grow bg-slate-100 pt-16 dark:bg-slate-950">
                 <div class="container mx-auto px-4 py-4 lg:p-8 xl:max-w-7xl">
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 xl:grid-cols-4" id="tagTable">
-                        <!-- Popular Pages -->
-                        <div
-                            class="flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4">
-                            <div class="mb-6 flex items-center justify-between gap-4">
-                                <h2 class="text-xl font-extrabold">Tags</h2>
-                                <button
-                                id="showTagForm"
-                                    type="button"
-                                    class="flex items-center justify-between gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-200/75 hover:text-slate-950 active:bg-slate-100 dark:bg-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-white dark:active:bg-slate-700/50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" viewBox="0 0 512 512" width="24"
-                                        height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
-                                    </svg>
-                                </button>
+
+                    <div id="categoryForm" class=" flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
+
+                        <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 py-8">
+                            <div class="w-full max-w-xl bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+
+                                <form action="/updateUser?id=<?= $_GET['id']; ?>" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
+                                    <input type="hidden" name="old_image" value="<?= $articleInfo['profile_picture_url']; ?>">
+                                    <input type="hidden" name="old_password" value="<?= $articleInfo['password_hash']; ?>">
+                                    <div class="mb-4">
+                                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Image</label>
+                                        <input type="file" id="image" name="image"
+                                            class="block w-full text-sm text-gray-900 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-gray-200 dark:hover:file:bg-gray-600">
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+
+                                        <div>
+                                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                            <input type="text" id="username" name="username" placeholder="username"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $userInfo['username']?>">
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
+                                            <input type="email" id="email" name="email" placeholder="email"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $userInfo['email']?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
+                                        <input type="password" id="password" name="password" placeholder="password"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                                        <textarea id="bio" name="bio" rows="4"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ><?= $userInfo['bio']?></textarea>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">role</label>
+                                        <input type="text" id="role" name="role" placeholder="role"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $userInfo['role']?>">
+                                    </div>
+
+                                    <button type="submit"
+                                        class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                        update User
+                                    </button>
+                                </form>
                             </div>
-                            <table class="w-full text-sm">
-                                <thead>
-                                <tr class="border border-neutral-600">
-                                        <th
-                                            class="px-4 py-4 text-center font-semibold  text-start  text-slate-500 dark:text-slate-400">
-                                            id
-                                        </th>
-                                        <th
-                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
-                                            Tag name
-                                        </th>
-                                        <th
-                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php foreach ($tags as $tag) : ?>
-                                        <tr class="border border-neutral-300 hover:bg-amber-50 dark:hover:bg-amber-900">
-                                            <td class="relative p-2 text-center">
-                                                <?= $tag['id']; ?>
-                                            </td>
-                                            <td class="relative p-2 text-center">
-                                                <?= $tag['name'] ?>
-                                            </td>
-                                            <td class="relative p-2 text-center">
-                                                <div class="flex items-center justify-center">
-                                                    <a href="editTag.php?id=<?= $tag['id']; ?>" id="update"
-                                                        name="update">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
-                                                            height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                                            <path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152L0 424c0 48.6 39.4 88 88 88l272 0c48.6 0 88-39.4 88-88l0-112c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 22.1-17.9 40-40 40L88 464c-22.1 0-40-17.9-40-40l0-272c0-22.1 17.9-40 40-40l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64z" />
-                                                        </svg>
-                                                    </a>
-
-                                                    <a href="tags.php?action=delete&id=<?= $tag['id']; ?>" id="delete"
-                                                        name="delete">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"
-                                                            height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                                            <path d="M170.5 51.6L151.5 80l145 0-19-28.4c-1.5-2.2-4-3.6-6.7-3.6l-93.7 0c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80 368 80l48 0 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-8 0 0 304c0 44.2-35.8 80-80 80l-224 0c-44.2 0-80-35.8-80-80l0-304-8 0c-13.3 0-24-10.7-24-24S10.7 80 24 80l8 0 48 0 13.8 0 36.7-55.1C140.9 9.4 158.4 0 177.1 0l93.7 0c18.7 0 36.2 9.4 46.6 24.9zM80 128l0 304c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-304L80 128zm80 64l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-
                         </div>
-                        <!-- END Referrers -->
-                        
                     </div>
-                    <div id="tagForm" class=" hidden flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
-
-                            <form action="tags.php?action=create" method="POST" class="max-w-sm w-72 mx-auto ">
-                                <div class="mb-5">
-                                    <label for="tagName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag Name</label>
-                                    <input type="text" name="tagName" id="tagName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example: javascript" />
-                                </div>
-                                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add tag</button>
-                            </form>
-                        </div>
                 </div>
             </main>
             <!-- END Page Content -->
@@ -578,8 +534,19 @@ $tagsList->deleteTag($_GET);
         </div>
         <!-- END Page Container -->
     </div>
-    
-    <script src="../../assets/js/script.js"></script>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        const categoryTable = document.getElementById("categoryTable");
+        const categoryForm = document.getElementById("categoryForm");
+        const showCategoryForm = document.getElementById("showCategoryForm");
+        showCategoryForm.addEventListener("click", (e) => {
+            e.preventDefault();
+            // console.log("clicked")
+            categoryTable.classList.add("hidden");
+            categoryForm.classList.remove("hidden")
+        })
+    </script>
 </body>
 
 </html>

@@ -27,10 +27,10 @@ class ORM
 
         try {
 
-            if (!empty($consitions)) {
+            if (!empty($conditions)) {
                 $conditionFields = [];
                 foreach ($conditions as $column => $value) {
-                    $coditionFields[] = "$column= :$column";
+                    $conditionFields[] = "$column = :$column";
                 }
                 $query .= " WHERE " . implode(" AND ", $conditionFields);
             }

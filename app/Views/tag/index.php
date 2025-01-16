@@ -1,16 +1,4 @@
-<?php
-require_once '../../config/connection.php';
-require '../../vendor/autoload.php';
 
-
-use App\Controllers\CategoryController;
-
-$categoryList = new CategoryController();
-$categories = $categoryList->listCategories();
-$categoryList->createCategory($_POST);
-$categoryList->deleteCategory($_GET);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,13 +107,11 @@ $categoryList->deleteCategory($_GET);
                             type="button"
                             class="flex size-9 items-center justify-center rounded-xl bg-green-700 text-white hover:bg-green-600 active:bg-green-700">
                             <a href="home.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185l0-121c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32l0 36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1l32 0 0 69.7c-.1 .9-.1 1.8-.1 2.8l0 112c0 22.1 17.9 40 40 40l16 0c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2l31.9 0 24 0c22.1 0 40-17.9 40-40l0-24 0-64c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 64 0 24c0 22.1 17.9 40 40 40l24 0 32.5 0c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1l16 0c22.1 0 40-17.9 40-40l0-16.2c.3-2.6 .5-5.3 .5-8.1l-.7-160.2 32 0z" />
-                                </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185l0-121c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32l0 36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1l32 0 0 69.7c-.1 .9-.1 1.8-.1 2.8l0 112c0 22.1 17.9 40 40 40l16 0c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2l31.9 0 24 0c22.1 0 40-17.9 40-40l0-24 0-64c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 64 0 24c0 22.1 17.9 40 40 40l24 0 32.5 0c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1l16 0c22.1 0 40-17.9 40-40l0-16.2c.3-2.6 .5-5.3 .5-8.1l-.7-160.2 32 0z"/></svg>
                             </a>
                         </button>
-
-
+                        
+                       
                         <button
                             id="analytics-tab"
                             role="tab"
@@ -142,111 +128,110 @@ $categoryList->deleteCategory($_GET);
                                         d="M12 2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-1ZM6.5 6a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V6ZM2 9a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V9Z" />
                                 </svg>
                             </a>
-                        </button>
+                           </button>
 
-                        <button
-                            x-on:focus="activeTab = 'article'"
-                            x-on:click="activeTab = 'article'"
-                            id="article-tab"
-                            role="tab"
-                            aria-controls="article-tab-pane"
-                            x-bind:aria-selected="activeTab === 'article' ? 'true' : 'false'"
-                            x-bind:tabindex="activeTab === 'article' ? '0' : '-1'"
-                            type="button"
-                            class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
-                            x-bind:class="{
+                           <button
+                              x-on:focus="activeTab = 'article'"
+                              x-on:click="activeTab = 'article'"
+                               id="article-tab"
+                               role="tab"
+                               aria-controls="article-tab-pane"
+                               x-bind:aria-selected="activeTab === 'article' ? 'true' : 'false'"
+                               x-bind:tabindex="activeTab === 'article' ? '0' : '-1'"
+                               type="button"
+                               class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
+                               x-bind:class="{
                              'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'article'
                               }">
-                            <a href="articles.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L80 480c-44.2 0-80-35.8-80-80L0 128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 272c0 8.8 7.2 16 16 16s16-7.2 16-16L96 96zm64 24l0 80c0 13.3 10.7 24 24 24l112 0c13.3 0 24-10.7 24-24l0-80c0-13.3-10.7-24-24-24L184 96c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16z" />
-                                </svg>
-                            </a>
-                        </button>
+                              <a href="articles.php">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                <path d="M96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L80 480c-44.2 0-80-35.8-80-80L0 128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 272c0 8.8 7.2 16 16 16s16-7.2 16-16L96 96zm64 24l0 80c0 13.3 10.7 24 24 24l112 0c13.3 0 24-10.7 24-24l0-80c0-13.3-10.7-24-24-24L184 96c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16z" />
+                              </svg>
+                              </a>
+                           </button>
 
-                        <button
-                            x-on:click="activeTab = 'tags'"
-                            x-on:focus="activeTab = 'tags'"
-                            id="tags-tab"
-                            role="tab"
-                            aria-controls="tags-tab-pane"
-                            x-bind:aria-selected="activeTab === 'tags' ? 'true' : 'false'"
-                            x-bind:tabindex="activeTab === 'tags' ? '0' : '-1'"
-                            type="button"
-                            class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
-                            x-bind:class="{
+                           <button
+                                x-on:click="activeTab = 'tags'"
+                                x-on:focus="activeTab = 'tags'"
+                                id="tags-tab"
+                                role="tab"
+                                aria-controls="tags-tab-pane"
+                                x-bind:aria-selected="activeTab === 'tags' ? 'true' : 'false'"
+                                x-bind:tabindex="activeTab === 'tags' ? '0' : '-1'"
+                                type="button"
+                                class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
+                                x-bind:class="{
                                'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'tags'
                                  }">
-                            <a href="tags.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                                </svg>
-                            </a>
-                        </button>
+                                <a href="/tags">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                                    </svg>
+                                </a>
+                            </button>
 
-                        <button
-                            x-on:click="activeTab = 'categories'"
-                            x-on:focus="activeTab = 'categories'"
-                            id="categories-tab"
-                            role="tab"
-                            aria-controls="categories-tab-pane"
-                            x-bind:aria-selected="activeTab === 'categories' ? 'true' : 'false'"
-                            x-bind:tabindex="activeTab === 'categories' ? '0' : '-1'"
-                            type="button"
-                            class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
-                            x-bind:class="{
+                            <button
+                                x-on:click="activeTab = 'categories'"
+                                x-on:focus="activeTab = 'categories'"
+                                id="categories-tab"
+                                role="tab"
+                                aria-controls="categories-tab-pane"
+                                x-bind:aria-selected="activeTab === 'categories' ? 'true' : 'false'"
+                                x-bind:tabindex="activeTab === 'categories' ? '0' : '-1'"
+                                type="button"
+                                class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
+                                x-bind:class="{
                                'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'categories'
                               }">
-                            <a href="categories.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z" />
-                                </svg>
-                            </a>
-                        </button>
+                                <a href="/category">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z" />
+                                    </svg>
+                                </a>
+                            </button>
 
-                        <button
-                            x-on:click="activeTab = 'users'"
-                            x-on:focus="activeTab = 'users'"
-                            id="settings-tab"
-                            role="tab"
-                            aria-controls="settings-tab-pane"
-                            x-bind:aria-selected="activeTab === 'Settings' ? 'true' : 'false'"
-                            x-bind:tabindex="activeTab === 'Settings' ? '0' : '-1'"
-                            type="button"
-                            class="flex size-9 items-center justify-center rounded-xl bg-slate-700 text-white hover:bg-slate-600 active:bg-slate-700"
-                            x-bind:class="{
+                            <button
+                                x-on:click="activeTab = 'users'"
+                                x-on:focus="activeTab = 'users'"
+                                id="settings-tab"
+                                role="tab"
+                                aria-controls="settings-tab-pane"
+                                x-bind:aria-selected="activeTab === 'Settings' ? 'true' : 'false'"
+                                x-bind:tabindex="activeTab === 'Settings' ? '0' : '-1'"
+                                type="button"
+                                class="flex size-9 items-center justify-center rounded-xl bg-slate-700 text-white hover:bg-slate-600 active:bg-slate-700"
+                                x-bind:class="{
                                'ring-4 ring-slate-400/50 dark:ring-slate-600/50': activeTab === 'Settings'
                                }">
-                            <a href="users.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
-                                </svg>
-                            </a>
-                        </button>
-
-                        <button
-                            x-on:focus="activeTab = 'article'"
-                            x-on:click="activeTab = 'article'"
-                            id="article-tab"
-                            role="tab"
-                            aria-controls="article-tab-pane"
-                            x-bind:aria-selected="activeTab === 'article' ? 'true' : 'false'"
-                            x-bind:tabindex="activeTab === 'article' ? '0' : '-1'"
-                            type="button"
-                            class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
-                            x-bind:class="{
+                                <a href="/users">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
+                                    </svg>
+                                </a>
+                            </button>
+                      
+                            <button
+                              x-on:focus="activeTab = 'article'"
+                              x-on:click="activeTab = 'article'"
+                               id="article-tab"
+                               role="tab"
+                               aria-controls="article-tab-pane"
+                               x-bind:aria-selected="activeTab === 'article' ? 'true' : 'false'"
+                               x-bind:tabindex="activeTab === 'article' ? '0' : '-1'"
+                               type="button"
+                               class="flex size-9 items-center justify-center rounded-xl bg-indigo-800 text-white hover:bg-indigo-700 active:bg-indigo-800"
+                               x-bind:class="{
                              'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'article'
                               }">
-                            <a href="authorArticles.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L80 480c-44.2 0-80-35.8-80-80L0 128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 272c0 8.8 7.2 16 16 16s16-7.2 16-16L96 96zm64 24l0 80c0 13.3 10.7 24 24 24l112 0c13.3 0 24-10.7 24-24l0-80c0-13.3-10.7-24-24-24L184 96c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16z" />
-                                </svg>
-                            </a>
-                        </button>
+                              <a href="authorArticles.php">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                <path d="M96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L80 480c-44.2 0-80-35.8-80-80L0 128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 272c0 8.8 7.2 16 16 16s16-7.2 16-16L96 96zm64 24l0 80c0 13.3 10.7 24 24 24l112 0c13.3 0 24-10.7 24-24l0-80c0-13.3-10.7-24-24-24L184 96c-13.3 0-24 10.7-24 24zm208-8c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l48 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0c-8.8 0-16 7.2-16 16zM160 304c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16zm0 96c0 8.8 7.2 16 16 16l256 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-256 0c-8.8 0-16 7.2-16 16z" />
+                              </svg>
+                              </a>
+                           </button>
 
-
-
-
+                        
+                        
 
                         <!-- <button
                             x-on:click="activeTab = 'Settings'"
@@ -272,7 +257,6 @@ $categoryList->deleteCategory($_GET);
                                     clip-rule="evenodd" />
                             </svg>
                         </button> -->
-
 
 
 
@@ -480,14 +464,14 @@ $categoryList->deleteCategory($_GET);
                 id="page-content"
                 class="grow bg-slate-100 pt-16 dark:bg-slate-950">
                 <div class="container mx-auto px-4 py-4 lg:p-8 xl:max-w-7xl">
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 xl:grid-cols-4" id="categoryTable">
+                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 xl:grid-cols-4" id="tagTable">
                         <!-- Popular Pages -->
                         <div
                             class="flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4">
                             <div class="mb-6 flex items-center justify-between gap-4">
-                                <h2 class="text-xl font-extrabold">Categories</h2>
+                                <h2 class="text-xl font-extrabold">Tags</h2>
                                 <button
-                                    id="showCategoryForm"
+                                id="showTagForm"
                                     type="button"
                                     class="flex items-center justify-between gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-200/75 hover:text-slate-950 active:bg-slate-100 dark:bg-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-white dark:active:bg-slate-700/50">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" viewBox="0 0 512 512" width="24"
@@ -498,34 +482,34 @@ $categoryList->deleteCategory($_GET);
                             </div>
                             <table class="w-full text-sm">
                                 <thead>
-                                    <tr>
+                                <tr class="border border-neutral-600">
                                         <th
-                                            class="py-2 pe-2 text-start font-medium text-slate-500 dark:text-slate-400">
+                                            class="px-4 py-4 text-center font-semibold  text-start  text-slate-500 dark:text-slate-400">
                                             id
                                         </th>
                                         <th
-                                            class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
                                             Tag name
                                         </th>
                                         <th
-                                            class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
                                             Actions
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <?php foreach ($categories as $category) : ?>
-                                        <tr>
-                                            <td class="relative p-2">
-                                                <?= $category['id']; ?>
+                                    <?php foreach ($tags as $tag) : ?>
+                                        <tr class="border border-neutral-300 hover:bg-amber-50 dark:hover:bg-amber-900">
+                                            <td class="relative p-2 text-center">
+                                                <?= $tag['id']; ?>
                                             </td>
-                                            <td class="relative p-2">
-                                                <?= $category['name'] ?>
+                                            <td class="relative p-2 text-center">
+                                                <?= $tag['name'] ?>
                                             </td>
-                                            <td class="relative p-2">
-                                                <div class="flex">
-                                                    <a href="editCategory.php?action=update&id=<?= $category['id']; ?>" id="update"
+                                            <td class="relative p-2 text-center">
+                                                <div class="flex items-center justify-center">
+                                                    <a href="/editTag?id=<?= $tag['id']; ?>" id="update"
                                                         name="update">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
                                                             height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -533,7 +517,7 @@ $categoryList->deleteCategory($_GET);
                                                         </svg>
                                                     </a>
 
-                                                    <a href="categories.php?action=delete&id=<?= $category['id']; ?>" id="delete"
+                                                    <a href="/deleteTag?action=delete&id=<?= $tag['id']; ?>" id="delete"
                                                         name="delete">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"
                                                             height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -550,18 +534,18 @@ $categoryList->deleteCategory($_GET);
 
                         </div>
                         <!-- END Referrers -->
-
+                        
                     </div>
-                    <div id="categoryForm" class=" hidden flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
+                    <div id="tagForm" class=" hidden flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
 
-                        <form action="categories.php?action=create" method="POST" class="max-w-sm w-72 mx-auto ">
-                            <div class="mb-5">
-                                <label for="categoryName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">category Name</label>
-                                <input type="text" name="categoryName" id="categoryName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example: DevOps" />
-                            </div>
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add category</button>
-                        </form>
-                    </div>
+                            <form action="/createTag" method="POST" class="max-w-sm w-72 mx-auto ">
+                                <div class="mb-5">
+                                    <label for="tagName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag Name</label>
+                                    <input type="text" name="tagName" id="tagName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example: javascript" />
+                                </div>
+                                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add tag</button>
+                            </form>
+                        </div>
                 </div>
             </main>
             <!-- END Page Content -->
@@ -579,19 +563,21 @@ $categoryList->deleteCategory($_GET);
         </div>
         <!-- END Page Container -->
     </div>
+    
+    <!-- <script src="../../../assets/js/script.js"></script> -->
+     <script>
+        const Tagtable= document.getElementById("tagTable");
+const tagForm = document.getElementById("tagForm");
+const showTagForm= document.getElementById("showTagForm");
 
-    <script src="../assets/js/script.js"></script>
-    <script>
-        const categoryTable = document.getElementById("categoryTable");
-        const categoryForm = document.getElementById("categoryForm");
-        const showCategoryForm = document.getElementById("showCategoryForm");
-        showCategoryForm.addEventListener("click", (e) => {
-            e.preventDefault();
-            // console.log("clicked")
-            categoryTable.classList.add("hidden");
-            categoryForm.classList.remove("hidden")
-        })
-    </script>
+
+showTagForm.addEventListener("click",(e)=>{
+    e.preventDefault();
+    // console.log("clicked")
+    Tagtable.classList.add("hidden");
+    tagForm.classList.remove("hidden")
+})
+     </script>
 </body>
 
 </html>

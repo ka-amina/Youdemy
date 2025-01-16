@@ -1,19 +1,4 @@
-<?php
-require_once '../../config/connection.php';
-require '../../vendor/autoload.php';
 
-use App\Controllers\TagController;
-
-$tag = new TagController();
-$tagInfo = $tag->getTagById($_GET['id']);
-$tag_id = $_GET['id'];
-echo $tag_id;
-
-$tag->updateTag();
-?>
- 
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -177,7 +162,7 @@ $tag->updateTag();
                                 x-bind:class="{
                                'ring-4 ring-indigo-400/50 dark:ring-indigo-600/50': activeTab === 'tags'
                                  }">
-                                <a href="tags.php">
+                                <a href="/tags">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                                     </svg>
@@ -217,7 +202,7 @@ $tag->updateTag();
                                 x-bind:class="{
                                'ring-4 ring-slate-400/50 dark:ring-slate-600/50': activeTab === 'Settings'
                                }">
-                                <a href="users.php">
+                                <a href="/users">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
                                     </svg>
@@ -410,8 +395,8 @@ $tag->updateTag();
                                 <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
                                     <div class="mx-1">
-                                        <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200"><?= $_SESSION["username"] ?></h1>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400"><?= $_SESSION["email"] ?></p>
+                                        <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">username</h1>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">email</p>
                                     </div>
                                 </a>
 
@@ -484,7 +469,7 @@ $tag->updateTag();
                     </div>
                     <div id="tagForm" class=" flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4 justify-center ">
 
-                        <form action="editTag.php?id=<?=$_GET['id']; ?>" method="POST" class="max-w-sm w-72 mx-auto ">
+                        <form action="/updateTag?id=<?=$_GET['id']; ?>" method="POST" class="max-w-sm w-72 mx-auto ">
                             <input type="hidden" name="id" value="<?=$_GET['id']; ?>">
                             <div class="mb-5">
                                 <label for="tagName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag Name</label>
