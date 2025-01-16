@@ -3,6 +3,7 @@ use App\Controllers\adminController;
 use App\Router;
 use App\Controllers\CategoryController;
 use App\Controllers\TagController;
+use App\Controllers\CoursController;
 
 $router = new Router();
 
@@ -26,5 +27,9 @@ $router->get('/editUser', adminController::class,'getUserById');
 $router->post('/updateUser', adminController::class,'updateUser');
 $router->get('/acceptTeacher', adminController::class,'acceptTeacher');
 $router->get('/banUser', adminController::class,'banUser');
+
+$router->get('/courses', CoursController::class,'showcategoriesAndTags');
+$router->get('/createCourse', CoursController::class,'createCours');
+// $router->get('/createCourse', CoursController::class,'showcategoriesAndTags');
 
 $router->dispatch();
