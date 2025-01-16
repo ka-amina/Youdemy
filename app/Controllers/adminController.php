@@ -17,14 +17,21 @@ class adminController extends Controller
 
     public function showUsers()
     {
+
         $users = $this->user->showUsers();
-        $this->render('user/index', ['user' => $users]);
+        $allusers = $this->user->showAllUsers();
+        $this->render('user/index', [
+            'user' => $users,
+            'allUsers' => $allusers
+        ]);
     }
+
 
     public function createUser()
     {
         $image = $_FILES['image']['name'];
         $temp_file = $_FILES['image']['tmp_name'];
+        echo $temp_file;
         $folder = "../../assets/images/$image";
         move_uploaded_file($temp_file, $folder);
 
@@ -65,7 +72,7 @@ class adminController extends Controller
                 // If a new image is uploaded
                 $image = $_FILES['image']['name'];
                 $temp_file = $_FILES['image']['tmp_name'];
-                $folder = "../assets/articleimages/$image";
+                $folder = "../../assets/images/$image";
                 move_uploaded_file($temp_file, $folder);
             } else {
                 // Use the existing image
@@ -95,11 +102,31 @@ class adminController extends Controller
         }
     }
 
-    public function deleteUser(){
+    public function deleteUser()
+    {
         if (isset($_GET['id'])) {
-            echo $_GET['id'];
+            // echo $_GET['id'];
             $id = ['id' => $_GET['id']];
             $this->user->deleteUdser($id);
+            header("Location: /users");
+            exit();
+        }
+    }
+
+    public function acceptTeacher()
+    {
+        if (isset($_GET['id'])) {
+            $id = ['id' => $_GET['id']];
+            $this->user->acceptTeacher(['role' => 'teacher'], $id);
+            header("Location: /users");
+            exit();
+        }
+    }
+
+    public function banUser(){
+        if (isset($_GET['id'])) {
+            $id = ['id' => $_GET['id']];
+            $this->user->banUser(['is_banned'=>true], $id);
             header("Location: /users");
             exit();
         }

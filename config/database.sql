@@ -101,3 +101,5 @@ INSERT INTO enrollments (student_id, course_id, completedAt) VALUES
 (2, 2, '2025-01-10 10:00:00'),  -- Jane Smith completed "Advanced Python for Data Science"
 (2, 4, NULL),  -- Jane Smith enrolled in "SEO for Beginners", not completed
 (1, 5, '2025-01-12 15:00:00');  -- John Doe completed "Machine Learning with Python"
+
+ alter table users add column is_banned BOOLEAN DEFAULT FALSE; 

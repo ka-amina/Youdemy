@@ -19,9 +19,12 @@ $router->get('/editTag', TagController::class,'getTagById');
 $router->post('/updateTag', TagController::class,'updateTag');
 
 $router->get('/users', adminController::class,'showUsers');
+$router->get('/teachers-students', adminController::class,'showAllUsers');
 $router->post('/createUser', adminController::class,'createUser');
 $router->get('/deleteUser', adminController::class,'deleteUser');
 $router->get('/editUser', adminController::class,'getUserById');
 $router->post('/updateUser', adminController::class,'updateUser');
+$router->get('/acceptTeacher', adminController::class,'acceptTeacher');
+$router->get('/banUser', adminController::class,'banUser');
 
 $router->dispatch();

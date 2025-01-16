@@ -203,7 +203,7 @@
                                 x-bind:class="{
                                'ring-4 ring-slate-400/50 dark:ring-slate-600/50': activeTab === 'Settings'
                                }">
-                                <a href="users.php">
+                                <a href="/users">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                         <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
                                     </svg>
@@ -469,6 +469,128 @@
                         <div
                             class="flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4">
                             <div class="mb-6 flex items-center justify-between gap-4">
+                                <h2 class="text-xl font-extrabold">Teachers Request </h2>
+                                <button
+                                    id="showCategoryForm"
+                                    type="button"
+                                    class="flex items-center justify-between gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-200/75 hover:text-slate-950 active:bg-slate-100 dark:bg-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-white dark:active:bg-slate-700/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" viewBox="0 0 512 512" width="24"
+                                        height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm  ">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="w-1/8 py-2 pe-2 text-start font-medium text-slate-500 dark:text-slate-400">
+                                                id
+                                            </th>
+
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                username
+                                            </th>
+
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                profile picture
+                                            </th>
+
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                email
+                                            </th>
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                bio
+                                            </th>
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                role
+                                            </th>
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                Banned
+                                            </th>
+
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                actions
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php foreach ($user as $us) : ?>
+                                            <tr>
+                                                <td class="relative p-2">
+                                                    <?= $us['id']; ?>
+                                                </td>
+                                                <td class="relative p-2">
+                                                    <?= $us['username'] ?>
+                                                </td>
+                                                <td class="relative p-2">
+                                                    <img src="../../../assets/images/<?= $us['profile_picture_url'] ?>" alt="" width="100" height="100">
+                                                </td>
+                                                <td class="relative p-2">
+                                                    <?= $us['email'] ?>
+                                                </td>
+                                                <td class="relative p-2">
+                                                    <?= $us['bio'] ?>
+                                                </td>
+                                                <td class="relative p-2">
+                                                    <?= $us['role'] ?>
+                                                </td>
+                                                <td class="relative p-2">
+                                                    <?= $us['is_banned'] ?>
+                                                </td>
+
+                                                <td class="relative p-2">
+                                                    <div class="flex  justify-center">
+                                                        <a href="/acceptTeacher?id=<?= $us['id']; ?>" id="acceptTeacher"
+                                                            name="accept">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"
+                                                            height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                                                        </a>
+                                                        <a href="/editUser?id=<?= $us['id']; ?>" id="update"
+                                                            name="update">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
+                                                                height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                                                <path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152L0 424c0 48.6 39.4 88 88 88l272 0c48.6 0 88-39.4 88-88l0-112c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 22.1-17.9 40-40 40L88 464c-22.1 0-40-17.9-40-40l0-272c0-22.1 17.9-40 40-40l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64z" />
+                                                            </svg>
+                                                        </a>
+
+                                                        <a href="/deleteUser?&id=<?= $us['id']; ?>" id="delete"
+                                                            name="delete">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"
+                                                                height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                                                <path d="M170.5 51.6L151.5 80l145 0-19-28.4c-1.5-2.2-4-3.6-6.7-3.6l-93.7 0c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80 368 80l48 0 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-8 0 0 304c0 44.2-35.8 80-80 80l-224 0c-44.2 0-80-35.8-80-80l0-304-8 0c-13.3 0-24-10.7-24-24S10.7 80 24 80l8 0 48 0 13.8 0 36.7-55.1C140.9 9.4 158.4 0 177.1 0l93.7 0c18.7 0 36.2 9.4 46.6 24.9zM80 128l0 304c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-304L80 128zm80 64l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                                                            </svg>
+                                                        </a>
+
+                                                        <a href="/banUser?&id=<?= $us['id']; ?>" id="ban"
+                                                            name="ban">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
+                                                            height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>
+                                                        </a>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div
+                            class="flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4">
+                            <div class="mb-6 flex items-center justify-between gap-4">
                                 <h2 class="text-xl font-extrabold">Users </h2>
                                 <button
                                     id="showCategoryForm"
@@ -513,6 +635,10 @@
                                             </th>
                                             <th
                                                 class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
+                                                Banned
+                                            </th>
+                                            <th
+                                                class="py-2 ps-2 text-end font-medium text-slate-500 dark:text-slate-400">
                                                 actions
                                             </th>
 
@@ -520,7 +646,7 @@
                                     </thead>
                                     <tbody>
 
-                                        <?php foreach ($user as $us) : ?>
+                                        <?php foreach ($allUsers as $us) : ?>
                                             <tr>
                                                 <td class="relative p-2">
                                                     <?= $us['id']; ?>
@@ -529,7 +655,7 @@
                                                     <?= $us['username'] ?>
                                                 </td>
                                                 <td class="relative p-2">
-                                                    <img src="../../assets/images/<?= $us['profile_picture_url'] ?>" alt="" width="100" height="100">
+                                                    <img src="../../../assets/images/<?= $us['profile_picture_url'] ?>" alt="" width="100" height="100">
                                                 </td>
                                                 <td class="relative p-2">
                                                     <?= $us['email'] ?>
@@ -540,9 +666,17 @@
                                                 <td class="relative p-2">
                                                     <?= $us['role'] ?>
                                                 </td>
+                                                <td class="relative p-2">
+                                                    <?= $us['is_banned'] ?>
+                                                </td>
 
                                                 <td class="relative p-2">
-                                                    <div class="flex">
+                                                    <div class="flex ">
+                                                        <a href="/acceptTeacher?id=<?= $us['id']; ?>" id="acceptTeacher"
+                                                            name="accept">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"
+                                                            height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                                                        </a>
                                                         <a href="/editUser?id=<?= $us['id']; ?>" id="update"
                                                             name="update">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
@@ -557,6 +691,12 @@
                                                                 height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                                                 <path d="M170.5 51.6L151.5 80l145 0-19-28.4c-1.5-2.2-4-3.6-6.7-3.6l-93.7 0c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80 368 80l48 0 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-8 0 0 304c0 44.2-35.8 80-80 80l-224 0c-44.2 0-80-35.8-80-80l0-304-8 0c-13.3 0-24-10.7-24-24S10.7 80 24 80l8 0 48 0 13.8 0 36.7-55.1C140.9 9.4 158.4 0 177.1 0l93.7 0c18.7 0 36.2 9.4 46.6 24.9zM80 128l0 304c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-304L80 128zm80 64l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
                                                             </svg>
+                                                        </a>
+
+                                                        <a href="/banUser?&id=<?= $us['id']; ?>" id="ban"
+                                                            name="ban">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24"
+                                                            height="24" fill="currentColor"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>
                                                         </a>
 
                                                     </div>
