@@ -23,7 +23,7 @@ class authentification extends Controller
         $this->render('register');
     }
     public function logout(){
-        header('location:/login');
+        header('location:/');
     }
 
     public function login()
@@ -49,11 +49,11 @@ class authentification extends Controller
                 'username' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password_hash' => $Hashedpassword,
-                'role' => 'student'
+                'role' => $_POST['role']
             ];
             $result = $this->user->register($data);
-            if ($result) {
-                header("Location: courses");
+            if (!$result) {
+                header("Location: login");
                 exit();
             }else{
                 header("Location: register");

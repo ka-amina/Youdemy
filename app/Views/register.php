@@ -19,6 +19,11 @@
           <input name="name" type="text" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-blue-300 transition-all" placeholder="Enter name" />
           <input name="email" type="text" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-blue-300 transition-all" placeholder="Enter email" />
           <input name="password" type="password" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-blue-300 transition-all" placeholder="Enter password" />
+          <select name="role" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-blue-300 transition-all" >
+            <option value="">select </option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
         </div>
 
         <div class="mt-8">
