@@ -3,28 +3,6 @@
 namespace App\Models;
 
 use App\Models\ORM;
-use App\Models\Category;
-use App\Models\Tag;
-
-
-// class Cours
-// {
-
-//     private string $table = 'courses';
-//     private $orm;
-
-//     public function __construct()
-//     {
-//         $this->orm = new ORM();
-//         $this->orm->setTable($this->table);
-    
-//     }
-
-//     public function createCours($data){
-//         $this->orm->create($data);
-//     }
-
-// }
 
 class Cours
 {
@@ -49,7 +27,9 @@ class Cours
             'teacher_id' => 1,
         ];
         
-        return $this->orm->create($courseData);
+        
+        $result= $this->orm->create($courseData);
+        return $result;
     }
 
     public function createByVideo($data, $type)
@@ -64,7 +44,8 @@ class Cours
             'teacher_id' => 1,
         ];
 
-        return $this->orm->create($courseData);
+        $result = $this->orm->create($courseData);
+        return $result;
     }
 
     public function __call($name, $args)
@@ -72,9 +53,31 @@ class Cours
         if ($name === "create") {
             if (count($args) === 1) {
                 return $this->createByDocument($args[0]);
+
             } elseif (count($args) === 2) {
                 return $this->createByVideo($args[0], $args[1]);
             }
         }
     }
+
+
+    public function addTags($courseId, $tagIds)
+{
+    if (empty($tagIds)) {
+        return false;
+    }
+
+    foreach ($tagIds as $tagId) {
+        $tags = [
+            'course_id' => $courseId,
+            'tag_id' => $tagId
+        ];
+        $this->orm->createcourseTags($tags);
+    }
+    return true;
+}
+
+public function getLastCourseId(){
+    return $this->orm->getLastCourseId();
+}
 }

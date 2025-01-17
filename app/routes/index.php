@@ -4,8 +4,16 @@ use App\Router;
 use App\Controllers\CategoryController;
 use App\Controllers\TagController;
 use App\Controllers\CoursController;
+use App\Controllers\authentification;
 
 $router = new Router();
+
+$router->get('/login', Authentification::class, 'getLogin');
+$router->post('/login', Authentification::class, 'login');
+
+$router->get('/register', Authentification::class, 'getregister');
+$router->post('/register', Authentification::class, 'register');
+$router->get('/logout', Authentification::class, 'logout');
 
 $router->get('/category', CategoryController::class,'listCategories');
 $router->post('/createCategory', CategoryController::class,'createCategory');
@@ -29,7 +37,7 @@ $router->get('/acceptTeacher', adminController::class,'acceptTeacher');
 $router->get('/banUser', adminController::class,'banUser');
 
 $router->get('/courses', CoursController::class,'showcategoriesAndTags');
-$router->get('/createCourse', CoursController::class,'createCours');
+$router->post('/createCourse', CoursController::class,'createCours');
 // $router->get('/createCourse', CoursController::class,'showcategoriesAndTags');
 
 $router->dispatch();
