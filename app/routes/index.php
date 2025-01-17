@@ -29,7 +29,7 @@ $router->get('/acceptTeacher', adminController::class,'acceptTeacher');
 $router->get('/banUser', adminController::class,'banUser');
 
 $router->get('/courses', CoursController::class,'showcategoriesAndTags');
-$router->get('/createCourse', CoursController::class,'createCours');
+$router->post('/createCourse', CoursController::class,'createCours');
 // $router->get('/createCourse', CoursController::class,'showcategoriesAndTags');
 
 $router->dispatch();

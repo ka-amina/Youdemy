@@ -117,17 +117,18 @@ class CoursController extends Controller
     public function showcategoriesAndTags()
     {
         $categories = $this->category->getCategories();
-        $tags = $this->tag;
-        var_dump($tags);
+        $tags = $this->tag->getTags();
+        // var_dump($tags);
         $this->render('courses/index', [
             'categories' => $categories,
-            // 'tags' => $tags
+            'tags' => $tags
         ]);
     }
 
     public function createCours()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $data = [
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
@@ -142,6 +143,13 @@ class CoursController extends Controller
                 $this->cours->create($data);
             } else if (isset($_POST['content_video'])) {
                 $this->cours->create($data, 'video');
+            }
+            $lastCourseId = $this->cours->getLastCourseId();
+            var_dump($lastCourseId);
+            if ($lastCourseId && isset($_POST['tags_id'])) {
+                $this->cours->addTags($lastCourseId['id'], $_POST['tags_id']);
+                header("Location: /courses");
+                exit();
             }
         }
     }

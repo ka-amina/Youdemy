@@ -626,6 +626,7 @@
                                         </select>
                                     </div>
                                     <?php
+                                    // var_dump($tags);
                                     foreach ($tags as $tag): ?>
                                         <div class="mb-2">
                                             <input class="form-check-input" type="checkbox"
