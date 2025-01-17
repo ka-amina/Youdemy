@@ -11,6 +11,9 @@ $router = new Router();
 $router->get('/login', Authentification::class, 'getLogin');
 $router->post('/login', Authentification::class, 'login');
 
+$router->get('/register', Authentification::class, 'getregister');
+$router->post('/register', Authentification::class, 'register');
+
 $router->get('/category', CategoryController::class,'listCategories');
 $router->post('/createCategory', CategoryController::class,'createCategory');
 $router->get('/deleteCategory', CategoryController::class,'deleteCategory');

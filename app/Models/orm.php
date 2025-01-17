@@ -141,6 +141,7 @@ class ORM
         }
     }
 
+
     public function getLastcourseId(){
         $query = "SELECT * from courses order by created_At desc limit 1;";
         $result = $this->connection->prepare($query);
@@ -157,4 +158,5 @@ class ORM
         $result->execute($data);
         return;
     }
+
 }
