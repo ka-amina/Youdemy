@@ -56,13 +56,5 @@ class Admin extends user
         return $this->orm->update($data, $conditions);
     }
 
-    public function login($email, $password)
-    {
-        $user = $this->orm->login($email, $password);
-
-        if ($user && $user['role'] == $this->role) {
-            return $user;
-        }
-        return null;
-    }
+    
 }

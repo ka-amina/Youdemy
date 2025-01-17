@@ -26,7 +26,7 @@
             sign in
           </button>
         </div>
-        <p class="text-sm mt-8 text-center text-gray-800">or<a href="register.php" class="text-blue-500 font-semibold hover:underline ml-1">register</a></p>
+        <p class="text-sm mt-8 text-center text-gray-800">or<a href="/register" class="text-blue-500 font-semibold hover:underline ml-1">register</a></p>
       </form>
     </div>
   </div>

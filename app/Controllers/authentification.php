@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Models\Admin;
-use App\Models\student;
 
 class authentification extends Controller
 {
@@ -12,24 +11,33 @@ class authentification extends Controller
     protected $student;
     public function __construct()
     {
-        $this->user = new Admin();
-        $this->student = new student();
+        $this->user = new admin();
     }
 
-    public function getLogin(){
+    public function getLogin()
+    {
         $this->render('login');
     }
-    public function getregister(){
+    public function getregister()
+    {
         $this->render('register');
     }
+    public function logout(){
+        header('location:/login');
+    }
 
-    public function login() {
+    public function login()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email =$_POST['email'];
-            $password =$_POST['password'];
-            $this->user->login($email, $password);
-            header('Location: users');
-            exit();
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $result = $this->user->login($email, $password);
+            if ($result) {
+                header('Location: users');
+                exit();
+            } else {
+                header('Location: login');
+            }
         }
     }
 
@@ -43,9 +51,14 @@ class authentification extends Controller
                 'password_hash' => $Hashedpassword,
                 'role' => 'student'
             ];
-            $this->student->register($data);
-            header("Location: courses");
-            exit();
+            $result = $this->user->register($data);
+            if ($result) {
+                header("Location: courses");
+                exit();
+            }else{
+                header("Location: register");
+                exit();
+            }
         }
     }
 }

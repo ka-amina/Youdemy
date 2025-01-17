@@ -23,7 +23,8 @@ abstract class user implements Authenticable{
 
     public function login($email, $password)
     {
-        return $this->orm->login($email, $password);
+        $user= $this->orm->login($email, $password);
+        return $user;
     }
 
    

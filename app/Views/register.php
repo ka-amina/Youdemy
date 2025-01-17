@@ -26,7 +26,7 @@
             Create an account
           </button>
         </div>
-        <p class="text-sm mt-8 text-center text-gray-800">Already have an account? <a href="login.php" class="text-blue-500 font-semibold hover:underline ml-1">Login here</a></p>
+        <p class="text-sm mt-8 text-center text-gray-800">Already have an account? <a href="/login" class="text-blue-500 font-semibold hover:underline ml-1">Login here</a></p>
       </form>
     </div>
   </div>

@@ -13,6 +13,7 @@ $router->post('/login', Authentification::class, 'login');
 
 $router->get('/register', Authentification::class, 'getregister');
 $router->post('/register', Authentification::class, 'register');
+$router->get('/logout', Authentification::class, 'logout');
 
 $router->get('/category', CategoryController::class,'listCategories');
 $router->post('/createCategory', CategoryController::class,'createCategory');
