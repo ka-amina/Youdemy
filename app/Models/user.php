@@ -16,11 +16,14 @@ abstract class user implements Authenticable{
         $this->orm->setTable($this->table);
     }
 
-    public function register($name, $email, $password) {
+    public function register($data)
+    {
+        return $this->orm->create($data);
     }
 
-    public function login($email, $password) {
-        
+    public function login($email, $password)
+    {
+        return $this->orm->login($email, $password);
     }
 
    
