@@ -32,6 +32,12 @@ class CoursController extends Controller
         ]);
     }
 
+    public function teacherCourses()
+    {
+        $cours = $this->cours->getCourses();
+        $this->render('courses/teacherCourses', ['cours' => $cours]);
+    }
+
     public function createCours()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -58,6 +64,51 @@ class CoursController extends Controller
                 header("Location: /courses");
                 exit();
             }
+        }
+    }
+
+    public function getCourseById()
+    {
+        $cours = $this->cours->getCourseById($_GET['id']);
+        $getTags = $this->cours->getTagsById($_GET['id']);
+        // var_dump($cours);
+        $categories = $this->category->getCategories();
+        $tags = $this->tag->getTags();
+        $this->render('courses/editCourse', [
+            'coursInfo' => $cours,
+            'categories' => $categories,
+            'tags' => $tags,
+            'tags_name' => $getTags
+        ]);
+    }
+
+    public function updateCourse()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // var_dump($_POST['id']);
+            $data = [
+                'title' => $_POST['title'],
+                'description' => $_POST['description'],
+                'content' => $_POST['content'],
+                'content_video' => $_POST['content_video'] ?? null,
+                'content_document' => $_POST['content_document'] ?? null,
+                'category' => $_POST['category'],
+                'level' => $_POST['level']
+            ];
+            $this->cours->updateCourse($data, ['id'=>$_POST['id']]);
+            header("Location: /courses");
+            exit();
+        }
+    }
+
+    public function deleteCourse(){
+        // echo"CLIKED";
+        if (isset($_GET['id'])){
+            $id=['id'=>$_GET['id']];
+            $this->cours->deleteCourse($id);
+            header("location: courses/teacherCourses");
+            exit();
+
         }
     }
 }

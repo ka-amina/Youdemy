@@ -15,6 +15,9 @@ $router->get('/register', Authentification::class, 'getregister');
 $router->post('/register', Authentification::class, 'register');
 $router->get('/logout', Authentification::class, 'logout');
 
+
+// $router->get('/logout', Authentification::class, 'logout');
+
 $router->get('/category', CategoryController::class,'listCategories');
 $router->post('/createCategory', CategoryController::class,'createCategory');
 $router->get('/deleteCategory', CategoryController::class,'deleteCategory');
@@ -38,6 +41,13 @@ $router->get('/banUser', adminController::class,'banUser');
 
 $router->get('/courses', CoursController::class,'showcategoriesAndTags');
 $router->post('/createCourse', CoursController::class,'createCours');
+$router->get('/teacherCourses', CoursController::class,'teacherCourses');
+$router->get('/editCourse', CoursController::class,'getCourseById');
+$router->post('/editCourse', CoursController::class,'updateCourse');
+$router->get('/deleteCourse', CoursController::class,'deleteCourse');
+
+
+
 // $router->get('/createCourse', CoursController::class,'showcategoriesAndTags');
 
 $router->dispatch();

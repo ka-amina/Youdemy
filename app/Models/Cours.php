@@ -26,9 +26,9 @@ class Cours
             'category_id' => $data['category'],
             'teacher_id' => 1,
         ];
-        
-        
-        $result= $this->orm->create($courseData);
+
+
+        $result = $this->orm->create($courseData);
         return $result;
     }
 
@@ -53,7 +53,6 @@ class Cours
         if ($name === "create") {
             if (count($args) === 1) {
                 return $this->createByDocument($args[0]);
-
             } elseif (count($args) === 2) {
                 return $this->createByVideo($args[0], $args[1]);
             }
@@ -62,22 +61,45 @@ class Cours
 
 
     public function addTags($courseId, $tagIds)
-{
-    if (empty($tagIds)) {
-        return false;
+    {
+        if (empty($tagIds)) {
+            return false;
+        }
+
+        foreach ($tagIds as $tagId) {
+            $tags = [
+                'course_id' => $courseId,
+                'tag_id' => $tagId
+            ];
+            $this->orm->createcourseTags($tags);
+        }
+        return true;
     }
 
-    foreach ($tagIds as $tagId) {
-        $tags = [
-            'course_id' => $courseId,
-            'tag_id' => $tagId
-        ];
-        $this->orm->createcourseTags($tags);
+    public function getLastCourseId()
+    {
+        return $this->orm->getLastCourseId();
     }
-    return true;
-}
 
-public function getLastCourseId(){
-    return $this->orm->getLastCourseId();
-}
+    public function getCourses()
+    {
+        return $this->orm->getCourses();
+    }
+
+    public function getCourseById($id)
+    {
+        return $this->orm->getCourseById($id);
+    }
+    public function getTagsById($id)
+    {
+        return $this->orm->getTagsNameById($id);
+    }
+    public function updateCourse($data, $conditions)
+    {
+        return $this->orm->update($data, $conditions);
+    }
+    public function deleteCourse($id)
+    {
+        return $this->orm->delete($id);
+    }
 }
