@@ -167,7 +167,8 @@ class ORM
 
     public function getCourses()
     {
-        $query = 'SELECT courses.id,name,title,description,level,is_published as pub,categories.name as category,users.username as teacher,status
+        $query = 'SELECT courses.id,name,title,description,level,is_published as pub,
+        content_video,content_document,categories.name as category,users.username as teacher,status
         from courses
         join categories on categories.id=courses.category_id
         join users on users.id=courses.teacher_id';

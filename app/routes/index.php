@@ -48,6 +48,8 @@ $router->get('/editCourse', CoursController::class,'getCourseById');
 $router->post('/editCourse', CoursController::class,'updateCourse');
 $router->get('/deleteCourse', CoursController::class,'deleteCourse');
 
+$router->get('/home', CoursController::class,'visitorCourses');
+
 
 
 // $router->get('/createCourse', CoursController::class,'showcategoriesAndTags');
