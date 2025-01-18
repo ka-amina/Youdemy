@@ -132,6 +132,8 @@ class ORM
 
     public function login($email, $password)
     {
+        // var_dump($email);
+        // var_dump($password);
         $query = "SELECT * FROM users WHERE email = :email";
         $result = $this->connection->prepare($query);
         $result->bindParam(':email', $email, PDO::PARAM_STR);
@@ -143,6 +145,7 @@ class ORM
             }
             return false;
         }
+        return ;
     }
 
 
@@ -178,10 +181,12 @@ class ORM
     }
     public function getCourseById($id)
     {
-        $query = "SELECT courses.id as course_id,name,title,description,content,content_video,content_document,level,is_published as pub,categories.name as category,users.username as teacher,status
+        $query = "SELECT courses.id as course_id,name,title,description,content,content_video,content_document,level,is_published as pub,categories.name as category,users.username as teacher,status,courses.created_at as created
         from courses
         join categories on categories.id=courses.category_id
-        join users on users.id=courses.teacher_id where courses.id=$id";
+        join users on users.id=courses.teacher_id 
+        
+        where courses.id=$id";
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetch(PDO::FETCH_ASSOC);
@@ -213,5 +218,18 @@ class ORM
      
     }
     
+    public function getStudentCourses($id){
+        $query = "SELECT courses.id,name,title,description,level,is_published as pub,
+        content_video,content_document,categories.name as category,users.username as teacher,enrollments.status
+        from courses
+        join categories on categories.id=courses.category_id
+        join users on users.id=courses.teacher_id
+        join enrollments on courses.id= enrollments.course_id
+        where student_id=$id and enrollments.status='accepted'";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+
+    }
     
 }

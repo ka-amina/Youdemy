@@ -103,3 +103,5 @@ INSERT INTO enrollments (student_id, course_id, completedAt) VALUES
 (1, 5, '2025-01-12 15:00:00');  -- John Doe completed "Machine Learning with Python"
 
  alter table users add column is_banned BOOLEAN DEFAULT FALSE; 
+ alter table enrollments add column status enum('accepted','rejected','pending') default 'pending';
+     alter table enrollments add column is_completed boolean default false;
