@@ -66,6 +66,7 @@ class ORM
     public function update($data, $conditions)
     {
         $conditionFields = [];
+        
         foreach ($conditions as $column => $value) {
             $conditionFields[] = "$column = :$column";
         }
@@ -73,10 +74,13 @@ class ORM
         foreach ($data as $column => $value) {
             $updateDataFields[] = "$column = :$column";
         }
+        var_dump($conditionFields);
+        var_dump($updateDataFields);
         try {
             $query = "UPDATE {$this->table} SET " . implode(", ", $updateDataFields) . " WHERE " . implode(" AND ", $conditionFields);
             $result = $this->connection->prepare($query);
             $result->execute(array_merge($data, $conditions));
+            // var_dump($result);
             return;
         } catch (PDOException $e) {
             error_log("Error selecting records: " . $e->getMessage());
@@ -142,14 +146,16 @@ class ORM
     }
 
 
-    public function getLastcourseId(){
+    public function getLastcourseId()
+    {
         $query = "SELECT * from courses order by created_At desc limit 1;";
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function createcourseTags($data){
+    public function createcourseTags($data)
+    {
         $columns = implode(",", array_keys($data));
         $values = ":" . implode(", :", array_keys($data));
         print_r($data);
@@ -159,4 +165,34 @@ class ORM
         return;
     }
 
+    public function getCourses()
+    {
+        $query = 'SELECT courses.id,name,title,description,level,is_published as pub,categories.name as category,users.username as teacher,status
+        from courses
+        join categories on categories.id=courses.category_id
+        join users on users.id=courses.teacher_id';
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getCourseById($id)
+    {
+        $query = "SELECT courses.id as course_id,name,title,description,content,content_video,content_document,level,is_published as pub,categories.name as category,users.username as teacher,status
+        from courses
+        join categories on categories.id=courses.category_id
+        join users on users.id=courses.teacher_id where courses.id=$id";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getTagsNameById($id)
+    {
+        $query = "SELECT name from cours_tags
+        join tags on tags.id=cours_tags.tag_id where course_id =$id";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
