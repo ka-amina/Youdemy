@@ -102,13 +102,15 @@ class CoursController extends Controller
     }
 
     public function deleteCourse(){
-        // echo"CLIKED";
         if (isset($_GET['id'])){
             $id=['id'=>$_GET['id']];
             $this->cours->deleteCourse($id);
             header("location: courses/teacherCourses");
             exit();
-
         }
+    }
+
+    public function countCourses(){
+        return $this->cours->countCourses();
     }
 }

@@ -56,5 +56,12 @@ class Admin extends user
         return $this->orm->update($data, $conditions);
     }
 
+    public function countUsers(){
+        return $this->orm->sum();
+    }
+
+    public function getTopUsers(){
+        return $this->orm->getTopUsers();
+    }
     
 }

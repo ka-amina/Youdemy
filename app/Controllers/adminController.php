@@ -4,15 +4,23 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Models\Admin;
-
+use App\Controllers\TagController;
+use App\Controllers\CategoryController;
+use App\Controllers\CoursController;
 
 class adminController extends Controller
 {
     protected $user;
+    protected $tag;
+    protected $category;
+    protected $courses;
 
     public function __construct()
     {
         $this->user = new Admin();
+        $this->tag = new TagController();
+        $this->category = new CategoryController();
+        $this->courses = new CoursController();
     }
 
     public function showUsers()
@@ -131,4 +139,22 @@ class adminController extends Controller
             exit();
         }
     }
+
+    public function getStatistique()
+    {
+
+        $sumUsers = $this->user->countUsers();
+        $tags= $this->tag->countTags();
+        $categories= $this->category->countCategories();
+        $cours= $this->courses->countCourses();
+        $topUsers= $this->user->getTopUsers();
+        $this->render('/dashboard', [
+            'usersCount' => $sumUsers,
+            'tagCount' => $tags,
+            'categoryCount' => $categories,
+            'coursesCount' => $cours,
+            'user'=>$topUsers
+        ]);
+    }
+    
 }

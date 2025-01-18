@@ -64,4 +64,7 @@ class TagController extends Controller
             exit();
         }
     }
+    public function countTags(){
+        return $this->tag->countTags();
+    }
 }
