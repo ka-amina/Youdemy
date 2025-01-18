@@ -194,5 +194,23 @@ class ORM
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getTopUsers()
+    {
+        $query = "SELECT 
+     users.id,profile_picture_url, username, 
+     COUNT(courses.id) AS courses_Count 
+     FROM courses 
+     JOIN users ON users.id = courses.teacher_id 
+     GROUP BY users.id 
+     ORDER BY courses_Count DESC 
+     LIMIT 3";
+     $result = $this->connection->prepare($query);
+     $result->execute();
+     return $result->fetchAll(PDO::FETCH_ASSOC);
+
+     
+    }
+    
     
 }

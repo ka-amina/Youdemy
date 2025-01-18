@@ -102,4 +102,8 @@ class Cours
     {
         return $this->orm->delete($id);
     }
+
+    public function countCourses(){
+        return $this->orm->sum();
+    }
 }

@@ -64,4 +64,8 @@ class CategoryController extends Controller
             exit();
         }
     }
+
+    public function countCategories(){
+        return $this->category->countCategories();
+    }
 }

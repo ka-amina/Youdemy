@@ -39,6 +39,8 @@ $router->post('/updateUser', adminController::class,'updateUser');
 $router->get('/acceptTeacher', adminController::class,'acceptTeacher');
 $router->get('/banUser', adminController::class,'banUser');
 
+$router->get('/dashboard', adminController::class,'getStatistique');
+
 $router->get('/courses', CoursController::class,'showcategoriesAndTags');
 $router->post('/createCourse', CoursController::class,'createCours');
 $router->get('/teacherCourses', CoursController::class,'teacherCourses');

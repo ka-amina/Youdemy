@@ -33,5 +33,7 @@ class Category {
         return $this->orm->delete($id);
     }
 
-
+    public function countCategories(){
+        return $this->orm->sum();
+    }
 }

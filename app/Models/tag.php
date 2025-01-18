@@ -38,4 +38,8 @@ class Tag
     public function deleteTag($id){
         return $this->orm->delete($id);
     }
+
+    public function countTags(){
+        return $this->orm->sum();
+    }
 }
