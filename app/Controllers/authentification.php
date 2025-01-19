@@ -45,10 +45,10 @@ class authentification extends Controller
                 if ($_SESSION['role'] == 'admin') {
                     header('Location: /dashboard');
                     exit();
-                } elseif ($_SESSION['role'] == 'teacher') {
+                } elseif ($_SESSION['role'] == 'teacher' ) {
                     header('Location: /teacherCourses');
                     exit();
-                }elseif ($_SESSION['role'] == 'student'){
+                }elseif ($_SESSION['role'] == 'student'  || $_SESSION['role'] == 'user'){
                     header('Location: /home');
                     exit();
                 }
@@ -70,6 +70,7 @@ class authentification extends Controller
                 'password_hash' => $Hashedpassword,
                 'role' => $_POST['role']
             ];
+            // var_dump($data);
             $result = $this->user->register($data);
             if (!$result) {
                 header("Location: login");
