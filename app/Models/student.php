@@ -4,8 +4,7 @@ namespace App\Models;
 
 class student extends user
 {
-    private string $table = 'tags';
-    private $orm;
+    protected $orm;
 
     public function __construct()
     {
@@ -15,5 +14,23 @@ class student extends user
 
     public function enroleCourse(){
         
+    }
+    public function getStudentCourses($id){
+        return $this->orm->getStudentCourses($id);
+    }
+
+    public function getCourseById($id)
+    {
+        return $this->orm->getCourseById($id);
+    }
+
+    public function getTagsById($id)
+    {
+        return $this->orm->getTagsNameById($id);
+    }
+
+    public function searchCourses($search)
+    {
+        return $this->orm->searchCourses($search);
     }
 }

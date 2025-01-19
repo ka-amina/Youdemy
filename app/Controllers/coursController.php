@@ -38,6 +38,12 @@ class CoursController extends Controller
         $this->render('courses/teacherCourses', ['cours' => $cours]);
     }
 
+    public function visitorCourses()
+    {
+        $cours = $this->cours->getCourses();
+        $this->render('courses', ['cours' => $cours]);
+    }
+
     public function createCours()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -46,16 +52,17 @@ class CoursController extends Controller
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
                 'content' => $_POST['content'],
-                'content_video' => $_POST['content_video'] ?? null,
-                'content_document' => $_POST['content_document'] ?? null,
+                'content_document' => $_POST['content_document'] ,
+                'content_video' => $_POST['content_video'] ,
                 'category' => $_POST['category'],
                 'level' => $_POST['level']
             ];
+            var_dump($data);
 
-            if (isset($_POST['content_document'])) {
-                $this->cours->create($data);
-            } else if (isset($_POST['content_video'])) {
-                $this->cours->create($data, 'video');
+            if ($_POST['content'] === 'document') {
+                $this->cours->create($data); 
+            } else if ($_POST['content'] === 'video') {
+                $this->cours->create($data, 'video');  
             }
             $lastCourseId = $this->cours->getLastCourseId();
             var_dump($lastCourseId);

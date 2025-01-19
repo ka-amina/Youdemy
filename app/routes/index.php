@@ -1,10 +1,12 @@
 <?php
+session_start();
 use App\Controllers\adminController;
 use App\Router;
 use App\Controllers\CategoryController;
 use App\Controllers\TagController;
 use App\Controllers\CoursController;
 use App\Controllers\authentification;
+use App\Controllers\studentController;
 
 $router = new Router();
 
@@ -47,6 +49,12 @@ $router->get('/teacherCourses', CoursController::class,'teacherCourses');
 $router->get('/editCourse', CoursController::class,'getCourseById');
 $router->post('/editCourse', CoursController::class,'updateCourse');
 $router->get('/deleteCourse', CoursController::class,'deleteCourse');
+
+$router->get('/home', CoursController::class,'visitorCourses');
+
+$router->get('/studentCourses', studentController::class,'getStudentCourses');
+$router->get('/cousePage', studentController::class,'getCourseById');
+$router->get('/search', studentController::class,'searchCourses');
 
 
 

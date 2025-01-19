@@ -23,7 +23,9 @@ class authentification extends Controller
         $this->render('register');
     }
     public function logout(){
-        header('location:/');
+        session_unset();
+        session_destroy();
+        header('location: home');
     }
 
     public function login()
@@ -31,9 +33,26 @@ class authentification extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
+            // var_dump($email);
+            // var_dump($password);
             $result = $this->user->login($email, $password);
-            if ($result) {
-                header('Location: users');
+            
+            if ($result == true) {
+                $_SESSION["role"] = $result["role"];
+                $_SESSION["id"] = $result["id"];
+                $_SESSION["username"] = $result["username"];
+                $_SESSION["email"] = $result["email"];
+                if ($_SESSION['role'] == 'admin') {
+                    header('Location: /dashboard');
+                    exit();
+                } elseif ($_SESSION['role'] == 'teacher') {
+                    header('Location: /teacherCourses');
+                    exit();
+                }elseif ($_SESSION['role'] == 'student'){
+                    header('Location: /home');
+                    exit();
+                }
+                
                 exit();
             } else {
                 header('Location: login');
