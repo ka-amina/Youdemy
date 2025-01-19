@@ -44,7 +44,7 @@ $router->get('/banUser', adminController::class,'banUser');
 
 $router->get('/dashboard', adminController::class,'getStatistique');
 
-$router->get('/courses', CoursController::class,'showcategoriesAndTags');
+// $router->get('/courses', CoursController::class,'showcategoriesAndTags');
 $router->post('/createCourse', CoursController::class,'createCours');
 $router->get('/teacherCourses', CoursController::class,'teacherCourses');
 $router->get('/editCourse', CoursController::class,'getCourseById');
@@ -54,7 +54,7 @@ $router->get('/deleteCourse', CoursController::class,'deleteCourse');
 $router->get('/home', CoursController::class,'visitorCourses');
 
 $router->get('/studentCourses', studentController::class,'getStudentCourses');
-$router->get('/cousePage', studentController::class,'getCourseById');
+$router->get('/coursePage', studentController::class,'getCourseById');
 $router->get('/search', studentController::class,'searchCourses');
 
 $router->get('/enrollCourse', enrollmentController::class,'enroll');
