@@ -106,4 +106,10 @@ class Cours
     public function countCourses(){
         return $this->orm->sum();
     }
+
+    public function coursesPagination($resultsPerPage,$offset){
+        return $this->orm->coursesPagination($resultsPerPage,$offset);
+
+    }
 }
+
