@@ -38,11 +38,8 @@ class CoursController extends Controller
         $this->render('courses/teacherCourses', ['cours' => $cours]);
     }
 
-    public function visitorCourses()
-    {
-        $cours = $this->cours->getCourses();
-        $this->render('courses', ['cours' => $cours]);
-    }
+
+    
 
     public function createCours()
     {
@@ -119,5 +116,17 @@ class CoursController extends Controller
 
     public function countCourses(){
         return $this->cours->countCourses();
+    }
+
+    public function visitorCourses(){
+        $currentPage = isset($_GET['page'])? (int)$_GET['page'] : 1;
+        $resultsPerPage = 8;
+        $offset = ($currentPage - 1) * $resultsPerPage;
+        $courses=$this->cours->coursesPagination($resultsPerPage,$offset);
+        $totalCourses= $this->cours->countCourses();
+        $totalPages = ceil($totalCourses / $resultsPerPage);
+        $this->render('courses', 
+             ['cours' => $courses,'totalPages'=>$totalPages,
+            'currentPage' => $currentPage]);
     }
 }

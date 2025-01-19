@@ -22,7 +22,7 @@
           <select name="role" class="bg-gray-100 w-full text-sm text-gray-800 px-4 py-4 focus:bg-transparent outline-blue-300 transition-all" >
             <option value="">select </option>
             <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
+            <option value="user">Teacher</option>
           </select>
         </div>
 

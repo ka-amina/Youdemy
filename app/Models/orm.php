@@ -260,4 +260,27 @@ class ORM
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function enroll($student_id, $course_id)
+    {
+
+        $query = "INSERT INTO enrollments (student_id, course_id) 
+        VALUES ($student_id, $course_id)";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
+    public function coursesPagination($resultsPerPage,$offset)
+    {
+        $query = "SELECT courses.id,name,title,description,level,is_published as pub,
+        content_video,content_document,categories.name as category,users.username as teacher,status
+        from courses
+        join categories on categories.id=courses.category_id
+        join users on users.id=courses.teacher_id
+        limit $resultsPerPage offset  $offset";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
