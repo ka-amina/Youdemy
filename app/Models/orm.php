@@ -66,7 +66,7 @@ class ORM
     public function update($data, $conditions)
     {
         $conditionFields = [];
-        
+
         foreach ($conditions as $column => $value) {
             $conditionFields[] = "$column = :$column";
         }
@@ -145,7 +145,7 @@ class ORM
             }
             return false;
         }
-        return ;
+        return;
     }
 
 
@@ -211,14 +211,13 @@ class ORM
      GROUP BY users.id 
      ORDER BY courses_Count DESC 
      LIMIT 3";
-     $result = $this->connection->prepare($query);
-     $result->execute();
-     return $result->fetchAll(PDO::FETCH_ASSOC);
-
-     
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    public function getStudentCourses($id){
+
+    public function getStudentCourses($id)
+    {
         $query = "SELECT courses.id,name,title,description,level,is_published as pub,
         content_video,content_document,categories.name as category,users.username as teacher,enrollments.status
         from courses
@@ -229,7 +228,36 @@ class ORM
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
-
     }
-    
+
+    public function searchCourses($search)
+    {
+        $query = "SELECT 
+        courses.id,title,description,level,is_published as pub,content_video,content_document,
+        courses.status,categories.name as category,
+        users.username as teacher,
+        GROUP_CONCAT(tags.name) as tags
+      FROM courses
+     JOIN categories ON categories.id = courses.category_id
+     JOIN users ON users.id = courses.teacher_id
+     LEFT JOIN cours_tags ON cours_tags.course_id = courses.id
+     LEFT JOIN tags ON tags.id = cours_tags.tag_id
+     WHERE 
+        courses.title LIKE :search 
+        OR courses.description LIKE :search
+        OR categories.name LIKE :search
+        OR users.username LIKE :search
+        OR tags.name LIKE :search
+     GROUP BY courses.id, courses.title, courses.description, courses.level, 
+             courses.is_published, courses.content_video, courses.content_document,
+             courses.status, categories.name, users.username
+     ORDER BY courses.created_at DESC";
+
+        $stmt = $this->connection->prepare($query);
+        $searchParam = "%$search%";
+        $stmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

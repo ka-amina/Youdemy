@@ -28,4 +28,9 @@ class student extends user
     {
         return $this->orm->getTagsNameById($id);
     }
+
+    public function searchCourses($search)
+    {
+        return $this->orm->searchCourses($search);
+    }
 }

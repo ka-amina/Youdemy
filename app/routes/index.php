@@ -54,6 +54,7 @@ $router->get('/home', CoursController::class,'visitorCourses');
 
 $router->get('/studentCourses', studentController::class,'getStudentCourses');
 $router->get('/cousePage', studentController::class,'getCourseById');
+$router->get('/search', studentController::class,'searchCourses');
 
 
 

@@ -29,4 +29,12 @@ class  studentController extends Controller
             'tags'=>$getTags
         ]);
     }
+
+    public function searchCourses()
+    {
+        $result = $this->student->searchCourses($_GET['search']);
+        $this->render('student/search', [
+            'search' => $result,
+        ]);
+    }
 }

@@ -57,7 +57,7 @@
             <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Explore Our Courses</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Course Card 1 -->
-                <?php foreach ($cours as $c) : ?>
+                <?php foreach ($search as $c) : ?>
                     <div class="bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                         <?php if ($c['content_video']) : ?>
 
