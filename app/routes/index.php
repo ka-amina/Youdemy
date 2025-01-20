@@ -60,6 +60,7 @@ $router->get('/coursePage', studentController::class,'getCourseById');
 $router->get('/search', studentController::class,'searchCourses');
 
 $router->get('/enrollCourse', enrollmentController::class,'enroll');
+$router->get('/complete', enrollmentController::class,'comleteCourse');
 
 
 

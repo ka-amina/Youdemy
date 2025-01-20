@@ -77,9 +77,11 @@
 
         </div>
         
+        <?php if($coursInfo['is_completed']==0):?>
         <div class="flex justify-center w-full">
-        <button class="mb-5 text-white bg-green-500 hover:bg-green-600 px-6 py-3 text-lg rounded-md shadow-md z-10">complete</button>
+        <button class="mb-5 text-white bg-green-500 hover:bg-green-600 px-6 py-3 text-lg rounded-md shadow-md z-10"><a href="/complete?id=<?=$coursInfo['course_id']?>">complete</a></button>
         </div>
+        <?php endif;?>
         <!-- Right Section: Video (iframe) or Course Text -->
         <div class="relative text-center mb-12">
             

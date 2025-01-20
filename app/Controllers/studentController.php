@@ -17,7 +17,8 @@ class  studentController extends Controller
 
     public function getStudentCourses(){
         $Courses=$this->student->getStudentCourses($_SESSION['id']);
-        $this->render('student/studentCourses',['cours'=>$Courses]);
+        $completed=$this->student->completedCourses($_SESSION['id']);
+        $this->render('student/studentCourses',['cours'=>$Courses,'completedCourses'=>$completed]);
     }
 
     public function getCourseById()

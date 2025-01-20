@@ -20,4 +20,8 @@ class enrollment
     {
         $this->orm->enroll($student_id, $course_id);
     }
+
+    public function completeCourse($course){
+        $this->orm->completeCourse($course);
+    }
 }
