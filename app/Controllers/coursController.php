@@ -144,4 +144,18 @@ class CoursController extends Controller
             ]
         );
     }
+
+    public function showCoursesRequest()
+    {
+        $result = $this->cours->showCoursesRequest();
+        $this->render(
+            'courses/coursesRequest',
+            ['request' => $result]
+        );
+    }
+
+    public function acceptCourse(){
+        $this->cours->acceptCourse($_GET['course'], $_GET['student']);
+        header('location: requests');
+    }
 }

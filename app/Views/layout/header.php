@@ -20,16 +20,6 @@
                         </a>
                         <!-- END Brand -->
 
-                        <!-- Search -->
-                        <div>
-                            <input
-                                type="text"
-                                id="search"
-                                name="search"
-                                class="w-full rounded-lg border-slate-200 bg-white text-sm focus:border-slate-400/75 focus:ring focus:ring-slate-300/30 dark:border-slate-700/75 dark:bg-transparent dark:ring-slate-300/15 dark:placeholder:text-slate-400"
-                                placeholder="Search.." />
-                        </div>
-                        <!-- END Search -->
                     </div>
                     <!-- END Left Section -->
 
@@ -66,28 +56,6 @@
                         </button>
                         <!-- END Dark Mode Toggle -->
 
-                        <!-- Notifications -->
-                        <button
-                            type="button"
-                            class="relative flex items-center justify-between gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-200/75 hover:text-slate-950 active:bg-slate-100 dark:bg-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-white dark:active:bg-slate-700/50">
-                            <div
-                                class="absolute -end-1.5 -top-2.5 inline-flex h-5 min-w-5 items-center justify-center rounded-lg bg-slate-700 px-1 text-xs font-medium text-white dark:bg-slate-300 dark:font-semibold dark:text-slate-900">
-                                3
-                            </div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="hi-mini hi-bell-alert inline-block size-5">
-                                <path
-                                    d="M4.214 3.227a.75.75 0 0 0-1.156-.955 8.97 8.97 0 0 0-1.856 3.825.75.75 0 0 0 1.466.316 7.47 7.47 0 0 1 1.546-3.186ZM16.942 2.272a.75.75 0 0 0-1.157.955 7.47 7.47 0 0 1 1.547 3.186.75.75 0 0 0 1.466-.316 8.971 8.971 0 0 0-1.856-3.825Z" />
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M10 2a6 6 0 0 0-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 0 0 .515 1.076 32.91 32.91 0 0 0 3.256.508 3.5 3.5 0 0 0 6.972 0 32.903 32.903 0 0 0 3.256-.508.75.75 0 0 0 .515-1.076A11.448 11.448 0 0 1 16 8a6 6 0 0 0-6-6Zm0 14.5a2 2 0 0 1-1.95-1.557 33.54 33.54 0 0 0 3.9 0A2 2 0 0 1 10 16.5Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                        <!-- END Notifications -->
 
                         <div x-data="{ isOpen: false }" class="relative inline-block ">
                             <!-- Dropdown toggle button -->

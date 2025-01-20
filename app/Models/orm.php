@@ -271,7 +271,7 @@ class ORM
         return;
     }
 
-    public function coursesPagination($resultsPerPage,$offset)
+    public function coursesPagination($resultsPerPage, $offset)
     {
         $query = "SELECT courses.id,name,title,description,level,is_published as pub,
         content_video,content_document,categories.name as category,users.username as teacher,status
@@ -282,5 +282,27 @@ class ORM
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function showCoursesRequest()
+    {
+        $query = "SELECT course_id,courses.title, student_id,users.username 
+        from enrollments 
+        join courses on courses.id=enrollments.course_id
+        join users on users.id=enrollments.student_id
+        where enrollments.status= 'pending'";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function acceptCourse($course, $student)
+    {
+        $query = "UPDATE enrollments 
+        set status='accepted' 
+        where course_id=$course and student_id=$student";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return;
     }
 }

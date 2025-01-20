@@ -111,5 +111,15 @@ class Cours
         return $this->orm->coursesPagination($resultsPerPage,$offset);
 
     }
+
+    public function showCoursesRequest(){
+        return $this->orm->showCoursesRequest();
+    }
+
+    public function acceptCourse($course, $student){
+        return $this->orm->acceptCourse($course, $student);
+    }
+
+    
 }
 

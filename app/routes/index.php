@@ -52,12 +52,16 @@ $router->post('/editCourse', CoursController::class,'updateCourse');
 $router->get('/deleteCourse', CoursController::class,'deleteCourse');
 
 $router->get('/home', CoursController::class,'visitorCourses');
+$router->get('/requests', CoursController::class,'showCoursesRequest');
+$router->get('/acceptCourse', CoursController::class,'acceptCourse');
 
 $router->get('/studentCourses', studentController::class,'getStudentCourses');
 $router->get('/coursePage', studentController::class,'getCourseById');
 $router->get('/search', studentController::class,'searchCourses');
 
 $router->get('/enrollCourse', enrollmentController::class,'enroll');
+
+
 
 
 
