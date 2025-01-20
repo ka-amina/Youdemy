@@ -168,13 +168,14 @@ class ORM
         return;
     }
 
-    public function getCourses()
+    public function getCourses($id)
     {
-        $query = 'SELECT courses.id,name,title,description,level,is_published as pub,
+        $query = "SELECT courses.id,name,title,description,level,is_published as pub,
         content_video,content_document,categories.name as category,users.username as teacher,status
         from courses
         join categories on categories.id=courses.category_id
-        join users on users.id=courses.teacher_id';
+        join users on users.id=courses.teacher_id
+        where teacher_id=$id";
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -185,7 +186,7 @@ class ORM
         from courses
         join categories on categories.id=courses.category_id
         join users on users.id=courses.teacher_id 
-        join enrollments on courses.id=enrollments.course_id 
+        left join enrollments on courses.id=enrollments.course_id 
         where courses.id=$id";
         $result = $this->connection->prepare($query);
         $result->execute();
@@ -319,7 +320,8 @@ class ORM
         return;
     }
 
-    public function completeCourse($course){
+    public function completeCourse($course)
+    {
         $query = "UPDATE enrollments 
         set is_completed= true 
         where course_id=$course";
@@ -327,4 +329,13 @@ class ORM
         $result->execute();
         return;
     }
+
+    public function deleteCourseTags($courseId)
+    {
+        $query = "DELETE FROM cours_tags WHERE course_id = $courseId";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
 }

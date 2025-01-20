@@ -41,7 +41,7 @@ class Cours
             'content_video' => $data['content_video'],
             'level' => $data['level'],
             'category_id' => $data['category'],
-            'teacher_id' => 1,
+            'teacher_id' => $data['teacher']
         ];
 
         $result = $this->orm->create($courseData);
@@ -81,9 +81,9 @@ class Cours
         return $this->orm->getLastCourseId();
     }
 
-    public function getCourses()
+    public function getCourses($id)
     {
-        return $this->orm->getCourses();
+        return $this->orm->getCourses($id);
     }
 
     public function getCourseById($id)
@@ -118,6 +118,10 @@ class Cours
 
     public function acceptCourse($course, $student){
         return $this->orm->acceptCourse($course, $student);
+    }
+
+    public function deleteCourseTags($courseId){
+        $this->orm->deleteCourseTags($courseId);
     }
 
     
