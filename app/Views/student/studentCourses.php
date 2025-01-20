@@ -26,7 +26,7 @@
     <section class="py-20 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
 
-            <h3 class="text-3xl font-bold text-start text-gray-800 mb-12">Uncompleted Courses</h3>
+            <h3 class="text-3xl font-bold text-start text-gray-800 mb-12">uncompleted Courses</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Course Card 1 -->
                 <?php foreach ($cours as $c) : ?>
@@ -44,8 +44,7 @@
                         <div class="p-6">
                             <h4 class="text-xl font-semibold text-gray-800"><?= $c['title'] ?></h4>
                             <p class="text-sm text-gray-600 mt-2">by <?= $c['teacher'] ?></p>
-                            <p class="text-sm text-gray-500 mt-2">Enrolled: 120 students</p>
-                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/enrollCourse" class="font-semibold  ml-1">Go to Course</a></button>
+                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/coursePage?id=<?= $c['id'] ?>" class="font-semibold  ml-1">Go to Course</a></button>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -58,7 +57,7 @@
             <h3 class="text-3xl font-bold text-start text-gray-800 mb-12">Completed Courses</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Course Card 1 -->
-                <?php foreach ($cours as $c) : ?>
+                <?php foreach ($completedCourses as $c) : ?>
                     <div class="bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                         <?php if ($c['content_video']) : ?>
 
@@ -73,8 +72,7 @@
                         <div class="p-6">
                             <h4 class="text-xl font-semibold text-gray-800"><?= $c['title'] ?></h4>
                             <p class="text-sm text-gray-600 mt-2">by <?= $c['teacher'] ?></p>
-                            <p class="text-sm text-gray-500 mt-2">Enrolled: 120 students</p>
-                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/cousePage?id=<?= $c['id'] ?>" class="font-semibold  ml-1">Go to Course</a></button>
+                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/coursePage?id=<?= $c['id'] ?>" class="font-semibold  ml-1">Go to Course</a></button>
                         </div>
                     </div>
                 <?php endforeach; ?>

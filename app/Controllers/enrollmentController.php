@@ -21,6 +21,11 @@ class enrollmentController extends Controller{
        
     }
 
+    public function comleteCourse(){
+        $this->enroll->completeCourse($_GET['id']);
+        header('location: studentCourses');
+    }
+
 }
 
 ?>

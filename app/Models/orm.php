@@ -168,24 +168,25 @@ class ORM
         return;
     }
 
-    public function getCourses()
+    public function getCourses($id)
     {
-        $query = 'SELECT courses.id,name,title,description,level,is_published as pub,
+        $query = "SELECT courses.id,name,title,description,level,is_published as pub,
         content_video,content_document,categories.name as category,users.username as teacher,status
         from courses
         join categories on categories.id=courses.category_id
-        join users on users.id=courses.teacher_id';
+        join users on users.id=courses.teacher_id
+        where teacher_id=$id";
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getCourseById($id)
     {
-        $query = "SELECT courses.id as course_id,name,title,description,content,content_video,content_document,level,is_published as pub,categories.name as category,users.username as teacher,status,courses.created_at as created
+        $query = "SELECT courses.id as course_id,name,title,description,content,content_video,content_document,level,is_published as pub,categories.name as category,users.username as teacher,courses.status,courses.created_at as created,is_completed
         from courses
         join categories on categories.id=courses.category_id
         join users on users.id=courses.teacher_id 
-        
+        left join enrollments on courses.id=enrollments.course_id 
         where courses.id=$id";
         $result = $this->connection->prepare($query);
         $result->execute();
@@ -224,7 +225,20 @@ class ORM
         join categories on categories.id=courses.category_id
         join users on users.id=courses.teacher_id
         join enrollments on courses.id= enrollments.course_id
-        where student_id=$id and enrollments.status='accepted'";
+        where student_id=$id and enrollments.status='accepted' and is_completed=false";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function completedCourses($id)
+    {
+        $query = "SELECT courses.id,name,title,description,level,is_published as pub,
+        content_video,content_document,categories.name as category,users.username as teacher,enrollments.status
+        from courses
+        join categories on categories.id=courses.category_id
+        join users on users.id=courses.teacher_id
+        join enrollments on courses.id= enrollments.course_id
+        where student_id=$id and enrollments.status='accepted' and is_completed=true";
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -271,7 +285,7 @@ class ORM
         return;
     }
 
-    public function coursesPagination($resultsPerPage,$offset)
+    public function coursesPagination($resultsPerPage, $offset)
     {
         $query = "SELECT courses.id,name,title,description,level,is_published as pub,
         content_video,content_document,categories.name as category,users.username as teacher,status
@@ -283,4 +297,45 @@ class ORM
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function showCoursesRequest()
+    {
+        $query = "SELECT course_id,courses.title, student_id,users.username 
+        from enrollments 
+        join courses on courses.id=enrollments.course_id
+        join users on users.id=enrollments.student_id
+        where enrollments.status= 'pending'";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function acceptCourse($course, $student)
+    {
+        $query = "UPDATE enrollments 
+        set status='accepted' 
+        where course_id=$course and student_id=$student";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
+    public function completeCourse($course)
+    {
+        $query = "UPDATE enrollments 
+        set is_completed= true 
+        where course_id=$course";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
+    public function deleteCourseTags($courseId)
+    {
+        $query = "DELETE FROM cours_tags WHERE course_id = $courseId";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
 }

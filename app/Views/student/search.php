@@ -17,9 +17,12 @@
 
             <!-- Auth Buttons (Visible when no session) -->
             <div class="space-x-4 hidden sm:block">
-                <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/login" class=" font-semibold  ml-1">Login</a></button>
+            <?php if (empty($_SESSION['role'])) { ?>
                 <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/studentCourses" class=" font-semibold  ml-1">view your Courses</a></button>
                 <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out">log out</button>
+            <?php }else{?>
+                <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/login" class=" font-semibold  ml-1">Login</a></button>
+            <?php };?>
             </div>
         </div>
     </header>

@@ -18,6 +18,9 @@ class student extends user
     public function getStudentCourses($id){
         return $this->orm->getStudentCourses($id);
     }
+    public function completedCourses($id){
+        return $this->orm->completedCourses($id);
+    }
 
     public function getCourseById($id)
     {

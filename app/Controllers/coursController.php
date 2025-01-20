@@ -21,25 +21,32 @@ class CoursController extends Controller
         $this->cours = new Cours();
     }
 
-    public function showcategoriesAndTags()
+    // public function showcategoriesAndTags()
+    // {
+    //     $categories = $this->category->getCategories();
+    //     $tags = $this->tag->getTags();
+    //     // var_dump($tags);
+    //     $this->render('courses/index', [
+    //         'categories' => $categories,
+    //         'tags' => $tags
+    //     ]);
+    // }
+
+    public function teacherCourses()
     {
         $categories = $this->category->getCategories();
         $tags = $this->tag->getTags();
         // var_dump($tags);
-        $this->render('courses/index', [
+        $cours = $this->cours->getCourses($_SESSION['id']);
+        $this->render('courses/teacherCourses', [
+            'cours' => $cours,
             'categories' => $categories,
             'tags' => $tags
         ]);
     }
 
-    public function teacherCourses()
-    {
-        $cours = $this->cours->getCourses();
-        $this->render('courses/teacherCourses', ['cours' => $cours]);
-    }
 
 
-    
 
     public function createCours()
     {
@@ -49,23 +56,26 @@ class CoursController extends Controller
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
                 'content' => $_POST['content'],
-                'content_document' => $_POST['content_document'] ,
-                'content_video' => $_POST['content_video'] ,
+                'content_document' => $_POST['content_document'],
+                'content_video' => $_POST['content_video'],
                 'category' => $_POST['category'],
-                'level' => $_POST['level']
+                'level' => $_POST['level'],
+                'teacher' => $_SESSION['id']
             ];
-            var_dump($data);
+            // var_dump($data);
+            // var_dump($_SESSION['id']);
+
 
             if ($_POST['content'] === 'document') {
-                $this->cours->create($data); 
+                $this->cours->create($data);
             } else if ($_POST['content'] === 'video') {
-                $this->cours->create($data, 'video');  
+                $this->cours->create($data, 'video');
             }
             $lastCourseId = $this->cours->getLastCourseId();
             var_dump($lastCourseId);
             if ($lastCourseId && isset($_POST['tags_id'])) {
                 $this->cours->addTags($lastCourseId['id'], $_POST['tags_id']);
-                header("Location: /courses");
+                header("Location: /teacherCourses");
                 exit();
             }
         }
@@ -94,39 +104,66 @@ class CoursController extends Controller
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
                 'content' => $_POST['content'],
-                'content_video' => $_POST['content_video'] ?? null,
-                'content_document' => $_POST['content_document'] ?? null,
-                'category' => $_POST['category'],
+                'content_video' => $_POST['content_video'],
+                'content_document' => $_POST['content_document'],
+                'category_id' => $_POST['category'],
                 'level' => $_POST['level']
             ];
-            $this->cours->updateCourse($data, ['id'=>$_POST['id']]);
-            header("Location: /courses");
-            exit();
+            $this->cours->updateCourse($data, ['id' => $_POST['id']]);
+            $this->cours->deleteCourseTags($_POST['id']);
+            if (isset($_POST['tags_id'])) {
+                $this->cours->addTags($_POST['id'], $_POST['tags_id']);
+                header("Location: teacherCourses");
+                exit();
+            }
         }
     }
 
-    public function deleteCourse(){
-        if (isset($_GET['id'])){
-            $id=['id'=>$_GET['id']];
+    public function deleteCourse()
+    {
+        if (isset($_GET['id'])) {
+            $id = ['id' => $_GET['id']];
             $this->cours->deleteCourse($id);
-            header("location: courses/teacherCourses");
+            header("location: teacherCourses");
             exit();
         }
     }
 
-    public function countCourses(){
+    public function countCourses()
+    {
         return $this->cours->countCourses();
     }
 
-    public function visitorCourses(){
-        $currentPage = isset($_GET['page'])? (int)$_GET['page'] : 1;
+    public function visitorCourses()
+    {
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $resultsPerPage = 8;
         $offset = ($currentPage - 1) * $resultsPerPage;
-        $courses=$this->cours->coursesPagination($resultsPerPage,$offset);
-        $totalCourses= $this->cours->countCourses();
+        $courses = $this->cours->coursesPagination($resultsPerPage, $offset);
+        $totalCourses = $this->cours->countCourses();
         $totalPages = ceil($totalCourses / $resultsPerPage);
-        $this->render('courses', 
-             ['cours' => $courses,'totalPages'=>$totalPages,
-            'currentPage' => $currentPage]);
+        $this->render(
+            'courses',
+            [
+                'cours' => $courses,
+                'totalPages' => $totalPages,
+                'currentPage' => $currentPage
+            ]
+        );
+    }
+
+    public function showCoursesRequest()
+    {
+        $result = $this->cours->showCoursesRequest();
+        $this->render(
+            'courses/coursesRequest',
+            ['request' => $result]
+        );
+    }
+
+    public function acceptCourse()
+    {
+        $this->cours->acceptCourse($_GET['course'], $_GET['student']);
+        header('location: requests');
     }
 }

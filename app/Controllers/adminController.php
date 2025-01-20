@@ -142,6 +142,7 @@ class adminController extends Controller
 
     public function getStatistique()
     {
+        // if ($_SESSION['role']=='admin'){
 
         $sumUsers = $this->user->countUsers();
         $tags= $this->tag->countTags();
@@ -155,6 +156,9 @@ class adminController extends Controller
             'coursesCount' => $cours,
             'user'=>$topUsers
         ]);
+    // }else{
+    //     header('location: home');
+    // }
     }
     
 }
