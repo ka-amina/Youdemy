@@ -107,7 +107,8 @@ class CoursController extends Controller
                 'content_video' => $_POST['content_video'],
                 'content_document' => $_POST['content_document'],
                 'category_id' => $_POST['category'],
-                'level' => $_POST['level']
+                'level' => $_POST['level'],
+                'status'=>'pending'
             ];
             $this->cours->updateCourse($data, ['id' => $_POST['id']]);
             $this->cours->deleteCourseTags($_POST['id']);
@@ -148,8 +149,8 @@ class CoursController extends Controller
                 'cours' => $courses,
                 'totalPages' => $totalPages,
                 'currentPage' => $currentPage
-            ]
-        );
+                ]
+            );
     }
 
     public function showCoursesRequest()
@@ -160,10 +161,29 @@ class CoursController extends Controller
             ['request' => $result]
         );
     }
-
+    
     public function acceptCourse()
     {
         $this->cours->acceptCourse($_GET['course'], $_GET['student']);
         header('location: requests');
+    }
+
+    public function getPendingCourses()
+    {
+        $request = $this->cours->getPendingCourses();
+        
+        // print_r($request);
+        $this->render('courses/teacherCoursesRequest', [
+            'request' => $request
+        ]);
+    }
+
+    public function accept(){
+        $this->cours->acceptTeacherCourse($_GET['id']);
+        header('location: coursesRequests');
+    }
+    public function refuse(){
+        $this->cours->rejectCourse($_GET['id']);
+        header('location: coursesRequests');
     }
 }

@@ -54,6 +54,9 @@ $router->get('/deleteCourse', CoursController::class,'deleteCourse');
 $router->get('/home', CoursController::class,'visitorCourses');
 $router->get('/requests', CoursController::class,'showCoursesRequest');
 $router->get('/acceptCourse', CoursController::class,'acceptCourse');
+$router->get('/coursesRequests', CoursController::class,'getPendingCourses');
+$router->get('/accept', CoursController::class,'accept');
+$router->get('/refuse', CoursController::class,'refuse');
 
 $router->get('/studentCourses', studentController::class,'getStudentCourses');
 $router->get('/coursePage', studentController::class,'getCourseById');

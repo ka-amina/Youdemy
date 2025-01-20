@@ -338,4 +338,25 @@ class ORM
         return;
     }
 
+    public function getPendingCourses(){
+        $query="SELECT * from courses where status='pending'";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function acceptTeacherCourse($id){
+        $query="UPDATE courses SET status='approved' where id=$id";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return;
+
+    }
+    public function rejectCourse($id){
+        $query="UPDATE courses SET status='rejected' where id=$id";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
 }

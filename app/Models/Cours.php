@@ -124,6 +124,17 @@ class Cours
         $this->orm->deleteCourseTags($courseId);
     }
 
+    public function getPendingCourses(){
+       return $this->orm->getPendingCourses();
+    }
+    public function acceptTeacherCourse($id){
+        $this->orm->acceptTeacherCourse($id);
+    }
+    public function rejectCourse($id){
+        $this->orm->rejectCourse($id);
+    }
+
+
     
 }
 
