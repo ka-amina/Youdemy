@@ -25,13 +25,17 @@ class adminController extends Controller
 
     public function showUsers()
     {
+        if ($_SESSION['role'] == 'admin') {
 
-        $users = $this->user->showUsers();
-        $allusers = $this->user->showAllUsers();
-        $this->render('user/index', [
-            'user' => $users,
-            'allUsers' => $allusers
-        ]);
+            $users = $this->user->showUsers();
+            $allusers = $this->user->showAllUsers();
+            $this->render('user/index', [
+                'user' => $users,
+                'allUsers' => $allusers
+            ]);
+        } else {
+            header('location: home');
+        }
     }
 
 
@@ -39,9 +43,12 @@ class adminController extends Controller
     {
         $image = $_FILES['image']['name'];
         $temp_file = $_FILES['image']['tmp_name'];
-        echo $temp_file;
-        $folder = "../../assets/images/$image";
+        // echo $temp_file;
+        $imageRoot = dirname(dirname(__DIR__));
+        $folder = $imageRoot . "/public/assets/images/" . $image;
+        // var_dump($folder);
         move_uploaded_file($temp_file, $folder);
+
 
         $username = $_POST['username'];
         $email = $_POST['email'];
@@ -66,6 +73,7 @@ class adminController extends Controller
 
     public function getUserById()
     {
+
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $user = $this->user->getUser($id);
@@ -80,7 +88,8 @@ class adminController extends Controller
                 // If a new image is uploaded
                 $image = $_FILES['image']['name'];
                 $temp_file = $_FILES['image']['tmp_name'];
-                $folder = "../../assets/images/$image";
+                $imageRoot = dirname(dirname(__DIR__));
+                $folder = $imageRoot . "/public/assets/images/" . $image;
                 move_uploaded_file($temp_file, $folder);
             } else {
                 // Use the existing image
@@ -131,10 +140,11 @@ class adminController extends Controller
         }
     }
 
-    public function banUser(){
+    public function banUser()
+    {
         if (isset($_GET['id'])) {
             $id = ['id' => $_GET['id']];
-            $this->user->banUser(['is_banned'=>true], $id);
+            $this->user->banUser(['is_banned' => true], $id);
             header("Location: /users");
             exit();
         }
@@ -145,20 +155,19 @@ class adminController extends Controller
         // if ($_SESSION['role']=='admin'){
 
         $sumUsers = $this->user->countUsers();
-        $tags= $this->tag->countTags();
-        $categories= $this->category->countCategories();
-        $cours= $this->courses->countCourses();
-        $topUsers= $this->user->getTopUsers();
+        $tags = $this->tag->countTags();
+        $categories = $this->category->countCategories();
+        $cours = $this->courses->countCourses();
+        $topUsers = $this->user->getTopUsers();
         $this->render('/dashboard', [
             'usersCount' => $sumUsers,
             'tagCount' => $tags,
             'categoryCount' => $categories,
             'coursesCount' => $cours,
-            'user'=>$topUsers
+            'user' => $topUsers
         ]);
-    // }else{
-    //     header('location: home');
-    // }
+        // }else{
+        //     header('location: home');
+        // }
     }
-    
 }
