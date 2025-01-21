@@ -171,15 +171,17 @@ class adminController extends Controller
         $categories = $this->category->countCategories();
         $cours = $this->courses->countCourses();
         $topUsers = $this->user->getTopUsers();
+        $getTopUsersBycourses=$this->user->getTopUsersBycourses();
         $this->render('/dashboard', [
             'usersCount' => $sumUsers,
             'tagCount' => $tags,
             'categoryCount' => $categories,
             'coursesCount' => $cours,
-            'user' => $topUsers
-        ]);
+            'user' => $topUsers,
+            'TopUsersBycourses'=>$getTopUsersBycourses ]);
         }else{
             header('location: home');
         }
     }
+    
 }

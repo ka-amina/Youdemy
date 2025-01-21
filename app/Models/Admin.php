@@ -63,5 +63,9 @@ class Admin extends user
     public function getTopUsers(){
         return $this->orm->getTopUsers();
     }
+
+    public function getTopUsersBycourses(){
+        return $this->orm->getTopUsersBycourses();
+    }
     
 }

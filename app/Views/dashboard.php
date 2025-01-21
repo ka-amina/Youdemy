@@ -212,23 +212,38 @@
                         <div
                             class="flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4">
                             <div class="mb-6 flex items-center justify-between gap-4">
-                                <h2 class="text-xl font-extrabold">Recent courses</h2>
-                                <button
-                                    type="button"
-                                    class="flex items-center justify-between gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-200/75 hover:text-slate-950 active:bg-slate-100 dark:bg-slate-700/50 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-white dark:active:bg-slate-700/50">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                        class="hi-mini hi-arrow-up-right inline-block size-5">
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
+                                <h2 class="text-xl font-extrabold">Top users By Courses</h2>
+                                
                             </div>
-                            
+                            <table class="w-full text-sm">
+                                <thead>
+                                <tr class="border border-neutral-600">
+                                        <th
+                                            class="px-4 py-4 text-center font-semibold  text-start  text-slate-500 dark:text-slate-400">
+                                            author name
+                                        </th>
+                                        <th
+                                            class="px-4 py-4 text-center font-semibold  text-slate-500 dark:text-slate-400">
+                                            total courses
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                <?php foreach ($TopUsersBycourses as $u) : ?>
+                                        <tr class="border border-neutral-300 hover:bg-amber-50 dark:hover:bg-amber-900">
+                                            <td class="relative p-2 text-center">
+                                                <?= $u['teacher']; ?>
+                                            </td>
+                                            <td class="relative p-2 text-center">
+                                            <?= $u['total_courses']?>
+                                            </td>
+                                            
+                                        </tr>
+
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
                         </div>
                         <!-- END Referrers -->
                     </div>

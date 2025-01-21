@@ -292,7 +292,8 @@ class ORM
         from courses
         join categories on categories.id=courses.category_id
         join users on users.id=courses.teacher_id
-        limit $resultsPerPage offset  $offset";
+        ORDER by courses.created_at desc
+        limit $resultsPerPage offset  $offset ";
         $result = $this->connection->prepare($query);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -379,6 +380,21 @@ class ORM
         
         // Check if $row is not false and 'count' exists
         return ($row && isset($row['count'])) ? (int)$row['count'] : 0;  // Return 0 if no count found
+    }
+
+    public function getTopUsersBycourses(){
+        $query=" SELECT users.username AS teacher,COUNT(courses.id) AS total_courses
+        FROM courses
+        JOIN users ON users.id = courses.teacher_id
+        JOIN enrollments ON enrollments.course_id = courses.id
+        WHERE courses.status = 'approved' AND enrollments.status = 'accepted'
+        GROUP BY users.username
+        ORDER BY total_courses DESC 
+        limit 5";
+         $result=$this->connection->prepare($query);
+         $result->execute();
+         return $result->fetchAll(PDO::FETCH_ASSOC);
+
     }
     
 }
