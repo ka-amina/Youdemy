@@ -67,7 +67,11 @@
                             <h4 class="text-xl font-semibold text-gray-800"><?= $c['title'] ?></h4>
                             <p class="text-sm text-gray-600 mt-2">by <?= $c['teacher'] ?></p>
                             <p class="text-sm text-gray-500 mt-2"><?= $c['description'] ?></p>
-                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/enrollCourse" class="font-semibold  ml-1">Go to Course</a></button>
+                            <?php if (empty($_SESSION['role'])) { ?>
+                                <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/enrollCourse" class="font-semibold  ml-1">Go to Course</a></button>
+                            <?php } else { ?>
+                                <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/enrollCourse?id=<?= $c['id'] ?>" class="font-semibold  ml-1">Enroll</a></button>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

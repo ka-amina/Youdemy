@@ -67,7 +67,7 @@ class CategoryController extends Controller
     {
         if ($_SESSION['role'] == 'admin') {
             if (isset($_GET['id'])) {
-                echo $_GET['id'];
+                // echo $_GET['id'];
                 $id = ['id' => $_GET['id']];
                 $this->category->deleteCategory($id);
                 header('Location: /category');
