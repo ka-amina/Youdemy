@@ -21,27 +21,21 @@ class CoursController extends Controller
         $this->cours = new Cours();
     }
 
-    // public function showcategoriesAndTags()
-    // {
-    //     $categories = $this->category->getCategories();
-    //     $tags = $this->tag->getTags();
-    //     // var_dump($tags);
-    //     $this->render('courses/index', [
-    //         'categories' => $categories,
-    //         'tags' => $tags
-    //     ]);
-    // }
 
     public function teacherCourses()
     {
         $categories = $this->category->getCategories();
         $tags = $this->tag->getTags();
-        // var_dump($tags);
         $cours = $this->cours->getCourses($_SESSION['id']);
+        $pending=$this->cours->countPending($_SESSION['id']);
+        $accepted=$this->cours->countaccepted($_SESSION['id']);
+       
         $this->render('courses/teacherCourses', [
             'cours' => $cours,
             'categories' => $categories,
-            'tags' => $tags
+            'tags' => $tags,
+            'pending' => $pending,
+            'accepted' => $accepted,
         ]);
     }
 
