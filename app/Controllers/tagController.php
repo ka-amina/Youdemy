@@ -17,27 +17,27 @@ class TagController extends Controller
     public function listTags()
     {
         if ($_SESSION['role'] == 'admin') {
-            $tags = $this->tag->getTags();
-            $this->render('tag/index', ['tags' => $tags]);
-        } else {
-            header('location: home');
-        }
+        $tags = $this->tag->getTags();
+        $this->render('tag/index', ['tags' => $tags]);
+    } else {
+        header('location: home');
+    }
     }
 
     public function createTag()
     {
         if ($_SESSION['role'] == 'admin') {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $data = [
-                    'name' => $_POST['tagName']
-                ];
-                $this->tag->createTag($data);
-                header("Location: /tags");
-                exit();
-            }
-        } else {
-            header('location: home');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'name' => $_POST['tagName']
+            ];
+            $this->tag->createTag($data);
+            header("Location: /tags");
+            exit();
         }
+    } else {
+        header('location: home');
+    }
     }
 
     public function getTagById()
@@ -52,35 +52,34 @@ class TagController extends Controller
     public function updateTag()
     {
         if ($_SESSION['role'] == 'admin') {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $this->tag->updateTag(
-                    ['name' => $_POST['tagName']],
-                    ['id' => $_GET['id']]
-                );
-                header("Location: /tags");
-                exit();
-            }
-        } else {
-            header('location: home');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->tag->updateTag(
+                ['name' => $_POST['tagName']],
+                ['id' => $_GET['id']]
+            );
+            header("Location: /tags");
+            exit();
         }
+    } else {
+        header('location: home');
+    }
     }
 
 
     public function deleteTag()
     {
         if ($_SESSION['role'] == 'admin') {
-            if (isset($_GET['id'])) {
-                $id = ['id' => $_GET['id']];
-                $this->tag->deleteTag($id);
-                header("Location: /tags");
-                exit();
-            }
-        } else {
-            header('location: home');
+        if (isset($_GET['id'])) {
+            $id = ['id' => $_GET['id']];
+            $this->tag->deleteTag($id);
+            header("Location: /tags");
+            exit();
         }
+    } else {
+        header('location: home');
     }
-    public function countTags()
-    {
+    }
+    public function countTags(){
         return $this->tag->countTags();
     }
 }
