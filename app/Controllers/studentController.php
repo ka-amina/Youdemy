@@ -16,9 +16,13 @@ class  studentController extends Controller
     }
 
     public function getStudentCourses(){
+        if ($_SESSION['role'] == 'student') {
         $Courses=$this->student->getStudentCourses($_SESSION['id']);
         $completed=$this->student->completedCourses($_SESSION['id']);
         $this->render('student/studentCourses',['cours'=>$Courses,'completedCourses'=>$completed]);
+    } else {
+        header('location: home');
+    }
     }
 
     public function getCourseById()

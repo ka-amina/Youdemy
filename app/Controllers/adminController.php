@@ -95,11 +95,11 @@ class adminController extends Controller
                 // Use the existing image
                 $image = $_GET['old_image'];
             }
-            if (isset($_POST['password'])) {
-                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            } else {
-                $password = $_GET['old_password'];
-            }
+            // if (isset($_POST['password'])) {
+            //     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            // } else {
+            //     $password = $_GET['old_password'];
+            // }
             $username = $_POST['username'];
             $email = $_POST['email'];
             // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -108,7 +108,7 @@ class adminController extends Controller
             $data = [
                 'username' => $username,
                 'email' => $email,
-                'password_hash' => $password,
+                // 'password_hash' => $password,
                 'bio' => $bio,
                 'role' => $role,
                 'profile_picture_url' => $image,
@@ -121,6 +121,7 @@ class adminController extends Controller
 
     public function deleteUser()
     {
+        if ($_SESSION['role'] == 'admin') {
         if (isset($_GET['id'])) {
             // echo $_GET['id'];
             $id = ['id' => $_GET['id']];
@@ -128,31 +129,42 @@ class adminController extends Controller
             header("Location: /users");
             exit();
         }
+    } else {
+        header('location: home');
+    }
     }
 
     public function acceptTeacher()
     {
+        if ($_SESSION['role'] == 'admin') {
         if (isset($_GET['id'])) {
             $id = ['id' => $_GET['id']];
             $this->user->acceptTeacher(['role' => 'teacher'], $id);
             header("Location: /users");
             exit();
         }
+    } else {
+        header('location: home');
+    }
     }
 
     public function banUser()
     {
+        if ($_SESSION['role'] == 'admin') {
         if (isset($_GET['id'])) {
             $id = ['id' => $_GET['id']];
             $this->user->banUser(['is_banned' => true], $id);
             header("Location: /users");
             exit();
         }
+    } else {
+        header('location: home');
+    }
     }
 
     public function getStatistique()
     {
-        // if ($_SESSION['role']=='admin'){
+        if ($_SESSION['role']=='admin'){
 
         $sumUsers = $this->user->countUsers();
         $tags = $this->tag->countTags();
@@ -166,8 +178,8 @@ class adminController extends Controller
             'coursesCount' => $cours,
             'user' => $topUsers
         ]);
-        // }else{
-        //     header('location: home');
-        // }
+        }else{
+            header('location: home');
+        }
     }
 }

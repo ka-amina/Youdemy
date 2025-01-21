@@ -43,6 +43,7 @@ class authentification extends Controller
                 $_SESSION["username"] = $result["username"];
                 $_SESSION["email"] = $result["email"];
                 $_SESSION["image"] = $result["profile_picture_url"];
+                $_SESSION["ban"]=$result["is_banned"];
                 if ($_SESSION['role'] == 'admin') {
                     header('Location: /dashboard');
                     exit();

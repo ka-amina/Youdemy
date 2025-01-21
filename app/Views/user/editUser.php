@@ -84,7 +84,7 @@
                                 <form action="/updateUser?id=<?= $_GET['id']; ?>" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
                                     <input type="hidden" name="old_image" value="<?= $articleInfo['profile_picture_url']; ?>">
-                                    <input type="hidden" name="old_password" value="<?= $articleInfo['password_hash']; ?>">
+                                    <!-- <input type="hidden" name="old_password" value="<?= $articleInfo['password_hash']; ?>"> -->
                                     <div class="mb-4">
                                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Image</label>
                                         <input type="file" id="image" name="image"
@@ -104,11 +104,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-4">
+                                    <!-- <div class="mb-4">
                                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
                                         <input type="password" id="password" name="password" placeholder="password"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </div>
+                                    </div> -->
 
                                     <div class="mb-4">
                                         <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>

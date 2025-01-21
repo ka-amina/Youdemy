@@ -15,15 +15,22 @@ class enrollmentController extends Controller{
     }
 
     public function enroll(){
-        
+        if ($_SESSION['role'] == 'student') {
             $this->enroll->enroll($_SESSION['id'],$_GET['id']);
             header('location: home');
+        } else {
+            header('location: home');
+        }
        
     }
 
     public function comleteCourse(){
+        if ($_SESSION['role'] == 'student') {
         $this->enroll->completeCourse($_GET['id']);
         header('location: studentCourses');
+    } else {
+        header('location: home');
+    }
     }
 
 }

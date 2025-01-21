@@ -16,21 +16,28 @@ class CategoryController extends Controller
 
     public function listCategories()
     {
-        $categories = $this->category->getCategories();
-        // var_dump($categories);
-        $this->render('category/index', ['categories' => $categories]);
+        if ($_SESSION['role'] == 'admin') {
+            $categories = $this->category->getCategories();
+            // var_dump($categories);
+            $this->render('category/index', ['categories' => $categories]);
+        } else {
+            header('location: home');
+        }
     }
 
     public function createCategory()
     {
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = [
-                'name' => $_POST['categoryName']
-            ];
-            $this->category->createCategory($data);
-            header('Location: /category');
-            exit();
+        if ($_SESSION['role'] == 'admin') {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $data = [
+                    'name' => $_POST['categoryName']
+                ];
+                $this->category->createCategory($data);
+                header('Location: /category');
+                exit();
+            }
+        } else {
+            header('location: home');
         }
     }
 
@@ -45,27 +52,34 @@ class CategoryController extends Controller
 
     public function updateCategory()
     {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->category->updateCategory(['name' => $_POST['categoryName']], ['id' => $_GET['id']]);
-            header('Location: /category');
-            exit();
+        if ($_SESSION['role'] == 'admin') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $this->category->updateCategory(['name' => $_POST['categoryName']], ['id' => $_GET['id']]);
+                header('Location: /category');
+                exit();
+            }
+        } else {
+            header('location: home');
         }
     }
 
     public function deleteCategory()
     {
-
-        if (isset($_GET['id'])) {
-            echo $_GET['id'];
-            $id = ['id' => $_GET['id']];
-            $this->category->deleteCategory($id);
-            header('Location: /category');
-            exit();
+        if ($_SESSION['role'] == 'admin') {
+            if (isset($_GET['id'])) {
+                echo $_GET['id'];
+                $id = ['id' => $_GET['id']];
+                $this->category->deleteCategory($id);
+                header('Location: /category');
+                exit();
+            }
+        } else {
+            header('location: home');
         }
     }
 
-    public function countCategories(){
+    public function countCategories()
+    {
         return $this->category->countCategories();
     }
 }
