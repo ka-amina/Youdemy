@@ -24,7 +24,7 @@ class Cours
             'content_document' => $data['content_document'],
             'level' => $data['level'],
             'category_id' => $data['category'],
-            'teacher_id' => 1,
+            'teacher_id' => $_SESSION['id'],
         ];
 
 
@@ -123,6 +123,23 @@ class Cours
     public function deleteCourseTags($courseId){
         $this->orm->deleteCourseTags($courseId);
     }
+
+    public function getPendingCourses(){
+       return $this->orm->getPendingCourses();
+    }
+    public function acceptTeacherCourse($id){
+        $this->orm->acceptTeacherCourse($id);
+    }
+    public function rejectCourse($id){
+        $this->orm->rejectCourse($id);
+    }
+    public function countaccepted($id){
+        return $this->orm->countacceptedCourses($id);
+    }
+    public function countPending($id){
+        return $this->orm->countPendingCourses($id);
+    }
+
 
     
 }

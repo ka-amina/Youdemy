@@ -18,10 +18,10 @@
             <!-- Auth Buttons (Visible when no session) -->
             <div class="space-x-4 hidden sm:block">
             <?php if (empty($_SESSION['role'])) { ?>
-                <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/studentCourses" class=" font-semibold  ml-1">view your Courses</a></button>
-                <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out">log out</button>
-            <?php }else{?>
                 <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/login" class=" font-semibold  ml-1">Login</a></button>
+                <?php }else{?>
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/studentCourses" class=" font-semibold  ml-1">view your Courses</a></button>
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 transition ease-in-out"><a href="/logout" class=" font-semibold  ml-1">log out</a></button>
             <?php };?>
             </div>
         </div>
@@ -62,21 +62,12 @@
                 <!-- Course Card 1 -->
                 <?php foreach ($cours as $c) : ?>
                     <div class="bg-white shadow-xl rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ease-in-out">
-                        <?php if ($c['content_video']) : ?>
-
-                            <iframe width="300" height="200" src=<?= $c['content_video'] ?> title="YouTube video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <?php elseif ($c['content_document']) : ?>
-
-                            <div class="w-full h-48 bg-gray-200">
-
-                                <div><?= $c['content_document'] ?></div>
-                            </div>
-                        <?php endif; ?>
+                        
                         <div class="p-6">
                             <h4 class="text-xl font-semibold text-gray-800"><?= $c['title'] ?></h4>
                             <p class="text-sm text-gray-600 mt-2">by <?= $c['teacher'] ?></p>
-                            <p class="text-sm text-gray-500 mt-2">Enrolled: 120 students</p>
-                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/enrollCourse?id=<?= $c['id'] ?>" class="font-semibold  ml-1">Go to Course</a></button>
+                            <p class="text-sm text-gray-500 mt-2"><?= $c['description'] ?></p>
+                            <button class="mt-6 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg  focus:ring-2 focus:ring-orange-500 transition ease-in-out"><a href="/enrollCourse?id=<?= $c['id'] ?>" class="font-semibold  ml-1">Enroll</a></button>
                         </div>
                     </div>
                 <?php endforeach; ?>

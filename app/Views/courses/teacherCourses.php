@@ -76,7 +76,42 @@
                 id="page-content"
                 class="grow bg-slate-100 pt-16 dark:bg-slate-950">
                 <div class="container mx-auto px-4 py-4 lg:p-8 xl:max-w-7xl">
+
                     <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 xl:grid-cols-4" id="CourseTable">
+                        <a
+                            href="javascript:void(0)"
+                            class="flex flex-col justify-center overflow-hidden rounded-lg bg-white ring-1 ring-slate-200/50 transition-opacity duration-100 hover:opacity-70 active:opacity-100 dark:bg-slate-900 dark:ring-slate-700/60">
+                            <div class="flex items-center justify-between gap-3 p-6">
+                                <div class="grow">
+                                    <div
+                                        class="flex items-center gap-0.5 text-sm font-medium text-emerald-500">
+                                        <span>accepted Courses</span>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <dt class="text-2xl font-extrabold"><?= htmlspecialchars($accepted) ?></dt>
+                                </div>
+
+                            </div>
+                        </a>
+                        <a
+                            href="javascript:void(0)"
+                            class="flex flex-col justify-center overflow-hidden rounded-lg bg-white ring-1 ring-slate-200/50 transition-opacity duration-100 hover:opacity-70 active:opacity-100 dark:bg-slate-900 dark:ring-slate-700/60">
+                            <div class="flex items-center justify-between gap-3 p-6">
+                                <div class="grow">
+                                    <div
+                                        class="flex items-center gap-0.5 text-sm font-medium text-emerald-500">
+                                        <span>Pending Courses</span>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <dt class="text-2xl font-extrabold"><?= htmlspecialchars($pending) ?></dt>
+                                </div>
+
+                            </div>
+                        </a>
                         <!-- Popular Pages -->
                         <div
                             class="flex flex-col justify-center overflow-hidden rounded-lg bg-white p-6 ring-1 ring-slate-200/50 dark:bg-slate-900 dark:ring-slate-700/60 xl:col-span-4">
@@ -230,20 +265,20 @@
                                                 <?php echo $tag['name']; ?>
                                             </label>
                                         </div>
-                                    <?php 
+                                    <?php
                                     endforeach;
-                                     ?>
+                                    ?>
 
                                     <select id="level" name="level"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option value="">Select Level</option>
-                                            
-                                                <option value="beginner">beginner</option>
-                                                <option value="intermediate">intermediate</option>
-                                                <option value="advanced">advanced</option>
-                                                <option value="expert">expert</option>
-                                            
-                                        </select>
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="">Select Level</option>
+
+                                        <option value="beginner">beginner</option>
+                                        <option value="intermediate">intermediate</option>
+                                        <option value="advanced">advanced</option>
+                                        <option value="expert">expert</option>
+
+                                    </select>
 
                                     <button type="submit"
                                         class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">

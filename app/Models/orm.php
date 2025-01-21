@@ -338,4 +338,47 @@ class ORM
         return;
     }
 
+    public function getPendingCourses(){
+        $query="SELECT * from courses where status='pending'";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function acceptTeacherCourse($id){
+        $query="UPDATE courses SET status='approved' where id=$id";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return;
+
+    }
+    public function rejectCourse($id){
+        $query="UPDATE courses SET status='rejected' where id=$id";
+        $result=$this->connection->prepare($query);
+        $result->execute();
+        return;
+    }
+
+    public function countacceptedCourses($id) {
+        $query = "SELECT count(*) as count FROM courses WHERE teacher_id = $id AND status = 'approved'";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        
+        // Check if $row is not false and 'count' exists
+        return ($row && isset($row['count'])) ? (int)$row['count'] : 0;  // Return 0 if no count found
+    }
+    
+    public function countPendingCourses($id) {
+        $query = "SELECT count(*) as count FROM courses WHERE teacher_id = $id AND status = 'pending'";
+        $result = $this->connection->prepare($query);
+        $result->execute();
+        
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        
+        // Check if $row is not false and 'count' exists
+        return ($row && isset($row['count'])) ? (int)$row['count'] : 0;  // Return 0 if no count found
+    }
+    
 }
